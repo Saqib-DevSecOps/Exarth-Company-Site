@@ -32,6 +32,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 INSTALLED_APPS = [
+    'jazzmin',
     # DJANGO APPS
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,25 +48,14 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'django_filters',
     'phonenumber_field',
-
-    # WEB APPS
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'allauth.mfa',
-
-    # REST APPS
-    'rest_framework',
-    'rest_framework.authtoken',
-    'dj_rest_auth',
-    'dj_rest_auth.registration',
-    'drf_yasg',
-
-
+    'django_ckeditor_5',
 
     # WEB APPS
     'src.website',
+    'src.services.services.apps.ServicesConfig',
+    'src.services.projects.apps.ProjectsConfig',
+    'src.services.company.apps.CompanyConfig',
+    'src.services.resources.apps.ResourcesConfig',
 
     # mailchimp
     'mailchimp_transactional',
@@ -95,16 +85,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
-
-    # YOUR MIDDLEWARES
-    "allauth.account.middleware.AccountMiddleware",
 ]
 
 AUTHENTICATION_BACKENDS = (
     # DJANGO BACKENDS
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-    # YOUR BACKENDS
 )
 
 TEMPLATES = [
@@ -195,17 +180,6 @@ DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {
     'GIF': ".gif"
 }
 DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
-
-""" ALL-AUTH SETUP --------------------------------------------------------------------------------"""
-ACCOUNT_LOGOUT_ON_GET = True
-SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
-OLD_PASSWORD_FIELD_ENABLED = True
-LOGOUT_ON_PASSWORD_CHANGE = False
-ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 """ DEBUGGING TOOLS """
 

@@ -1,8 +1,10 @@
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 from django.views.static import serve
 
+from root import settings
 from root.settings import ENVIRONMENT, MEDIA_ROOT, STATIC_ROOT
 
 urlpatterns = []
@@ -27,3 +29,6 @@ urlpatterns += [
     # Other URL patterns
     path("__reload__/", include("django_browser_reload.urls")),
 ]
+urlpatterns += [
+    path("ckeditor5/", include('django_ckeditor_5.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
