@@ -42,14 +42,14 @@
 
 /************************************/
 /*** 	 01. Global Variables	  ***/
-/************************************/	
+/************************************/
 
 :root{
-	--primary-color			: #042A2D;
+	--primary-color			: #2d0404;
 	--secondary-color		: #F2F1ED;
 	--text-color			: #8F8F8F;
-	--accent-color			: #73ED7C;
-	--dark-color		    : #019297;
+	--accent-color			: #ed7373;
+	--dark-color		    : #970101;
 	--white-color			: #FFFFFF;
 	--divider-color			: #DFE1DE;
 	--dark-divider-color	: #FFFFFF33;
@@ -350,7 +350,7 @@ body{
 
 .section-title-content p{
 	margin: 0;
-} 
+}
 
 .section-title{
 	margin-bottom: 40px;
@@ -1371,6 +1371,7 @@ header.main-header .header-sticky.active .container-fluid::before{
 	flex-wrap: wrap;
 	gap: 30px;
 }
+
 
 .pricing-box{
 	width: 100%;
@@ -2527,7 +2528,7 @@ header.main-header .header-sticky.active .container-fluid::before{
 	border-radius: 10px;
 }
 
-.our-approach-content-footer a:before{ 
+.our-approach-content-footer a:before{
 	display: none;
 }
 
@@ -2649,6 +2650,10 @@ header.main-header .header-sticky.active .container-fluid::before{
 	padding: 100px 0;
 }
 
+.industry-we-serve{
+	padding: 100px 0;
+}
+
 .why-choose-us-content{
 	margin-right: 20px;
 }
@@ -2667,7 +2672,7 @@ header.main-header .header-sticky.active .container-fluid::before{
 	margin-bottom: 10px;
 }
 
-.skillbar .skill-data .skill-title{	
+.skillbar .skill-data .skill-title{
 	font-size: 16px;
 	text-transform: capitalize;
 	color: var(--primary-color);
@@ -2788,7 +2793,7 @@ header.main-header .header-sticky.active .container-fluid::before{
     left: 0;
     right: 0;
     bottom: 0;
-	margin: 0 auto; 
+	margin: 0 auto;
 	transform: translateY(100%);
 	text-align: center;
 	z-index: 1;
@@ -3309,7 +3314,7 @@ header.main-header .header-sticky.active .container-fluid::before{
     transition: all 0.3s ease-in-out;
 }
 
-.page-pagination ul li.active a, 
+.page-pagination ul li.active a,
 .page-pagination ul li a:hover{
     background: var(--accent-color);
 }
@@ -4030,7 +4035,7 @@ header.main-header .header-sticky.active .container-fluid::before{
 
 .contact-us-title h3{
     font-size: 22px;
-    text-transform: capitalize;    
+    text-transform: capitalize;
     margin-bottom: 10px;
 }
 
@@ -4856,7 +4861,7 @@ header.main-header .header-sticky.active .container-fluid::before{
 		text-align: left;
 		margin-top: 20px;
 	}
-	
+
 	.our-partners .company-logo{
 		padding: 35px 25px;
 	}
@@ -5118,7 +5123,7 @@ header.main-header .header-sticky.active .container-fluid::before{
 	.page-pricing{
         padding: 50px 0;
     }
-    
+
     .page-pricing .pricing-box{
         padding: 30px;
     }
@@ -5250,7 +5255,7 @@ header.main-header .header-sticky.active .container-fluid::before{
         font-size: 20px;
     }
 
-    .google-map-iframe, 
+    .google-map-iframe,
     .google-map-iframe iframe{
         height: 450px;
     }
@@ -5286,7 +5291,7 @@ header.main-header .header-sticky.active .container-fluid::before{
 	.error-page{
 		padding: 50px 0;
 	}
-	
+
 	.error-page-image{
 		margin-bottom: 20px;
 	}
@@ -5802,7 +5807,7 @@ header.main-header .header-sticky.active .container-fluid::before{
 		top: 20px;
 		left: 0;
 	}
-	
+
 	.team-image{
         margin-bottom: 15px;
 	}
@@ -5849,7 +5854,7 @@ header.main-header .header-sticky.active .container-fluid::before{
 		background-position: 20px 20px;
         padding: 70px 20px 20px 20px;
 	}
-	
+
 	.post-entry h2{
 		font-size: 28px;
 	}
@@ -5901,7 +5906,7 @@ header.main-header .header-sticky.active .container-fluid::before{
     }
 
 	.client-testimonial-item{
-        display: block;   
+        display: block;
     }
 
     .client-testimonial-author{
@@ -5940,7 +5945,7 @@ header.main-header .header-sticky.active .container-fluid::before{
         font-size: 18px;
     }
 
-    .google-map-iframe, 
+    .google-map-iframe,
     .google-map-iframe iframe{
         height: 350px;
     }
