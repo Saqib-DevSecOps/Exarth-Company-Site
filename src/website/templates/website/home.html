@@ -1,19 +1,45 @@
 {% extends 'base.html' %}
 {% block subtitle %} Home {% endblock %}
 {% load static %}
-{% block content %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.11/dist/css/splide.min.css">
+{% endblock extra_head %}
+{% block extra_css %}
 <style>
+    #rcorners3 {
+        border-radius: 20px 50px;
+    }
 
-#rcorners3 {
-  border-radius: 20px 50px;
-}
-.tech-icon {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-}
+    .tech-icon {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+    }
 
+    #tech-icons-slider .splide__slide .card {
+        border-radius: 30px !important;
+        overflow: hidden;
+
+    }
+
+    .splide__arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 45px;
+        height: 45px;
+        background-image: linear-gradient(to right, var(--dark-color) 0%, var(--accent-color) 50%, var(--dark-color) 100%);
+        background-size: 200% auto;
+        border-radius: 50%;
+        transition: all 0.4s ease-in-out;
+        border: none;
+        z-index: 10;
+    }
 </style>
+
+{% endblock extra_css%}
+{% block content %}
 <!-- Hero Section Start -->
 <div class="hero bg-section hero-video">
     <!-- Video Start -->
@@ -380,7 +406,6 @@
 </div>
 <!-- Our Service End -->
 
-
 <!-- Why Choose Us Section Start -->
 <div class="why-choose-us">
     <div class="container">
@@ -445,14 +470,14 @@
 </div>
 <!-- Why Choose Us Section End -->
 
-
 <div class="our-pricing bg-section">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
                     <h3 class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">Our Technology</h3>
-                    <h2 class="wow fadeInUp" data-wow-delay="0.25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">
+                    <h2 class="wow fadeInUp" data-wow-delay="0.25s"
+                        style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">
                         Cutting-Edge <span>Tools and Frameworks</span>
                     </h2>
                 </div>
@@ -460,31 +485,57 @@
         </div>
 
         <div class="row">
-            {% for object in '123' %}
-            <div class="col-lg-4">
-                <div class="card p-4 mb-4" id="rcorners3">
-                    <div class="card-body">
-                        <h5 class="card-title mb-3">Frontend Development</h5>
-                        <div class="d-flex flex-wrap justify-content-start">
-                            <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2" alt="HTML">
-                            <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2" alt="HTML">
-                            <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2" alt="HTML">
-                            <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2" alt="HTML">
-                            <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2" alt="HTML">
-                            <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2" alt="HTML">
-                            <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2" alt="HTML">
-                            <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2" alt="HTML">
-                            <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2" alt="HTML">
-
-                        </div>
-                    </div>
+            <div class="splide" id="tech-icons-slider">
+                <div class="splide__track">
+                    <ul class="splide__list" data-cursor-text="Drag">
+                        {% for object in '123' %}
+                        <li class="splide__slide">
+                            <div class="col-lg-12 p-1">
+                                <div class="card  mb-4 rounded border border-danger"
+                                     style="border-radius: 15px;padding-left: 18px">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-3">Frontend Development</h5>
+                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
+                                             alt="HTML">
+                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
+                                             alt="HTML">
+                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
+                                             alt="HTML">
+                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
+                                             alt="HTML">
+                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
+                                             alt="HTML">
+                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
+                                             alt="HTML">
+                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
+                                             alt="HTML">
+                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
+                                             alt="HTML">
+                                        <img src="{% static 'website/images/python.png' %}"
+                                             class="tech-icon me-2 mb-2"
+                                             alt="HTML">
+                                        <img
+                                                src="{% static 'website/images/python.png' %}"
+                                                class="tech-icon me-2 mb-2"
+                                                alt="HTML">
+                                        <img src="{% static 'website/images/python.png' %}"
+                                             class="tech-icon me-2 mb-2"
+                                             alt="HTML"><img
+                                            src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
+                                            alt="HTML">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
-            {% endfor %}
         </div>
+
+
     </div>
 </div>
-
 
 <!-- Our Potential Start -->
 <div class="industry-we-serve bg-section">
@@ -508,7 +559,8 @@
                         <h3 class="wow fadeInUp">industries we serve</h3>
                         <h2 class="wow fadeInUp" data-wow-delay="0.25s">Empowering Growth
                             <span>across various sectors</span></h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.5s">We cater to a wide range of industries, offering tailored solutions to help businesses achieve measurable success and sustainable growth.</p>
+                        <p class="wow fadeInUp" data-wow-delay="0.5s">We cater to a wide range of industries, offering
+                            tailored solutions to help businesses achieve measurable success and sustainable growth.</p>
                     </div>
                     <!-- Section Title End -->
 
@@ -523,7 +575,8 @@
                     <div class="company-growth-item">
                         <h2><span class="counter">15</span>+</h2>
                         <h3>Retail & E-commerce</h3>
-                        <p>We provide solutions to optimize inventory, sales, and customer engagement for retail businesses.</p>
+                        <p>We provide solutions to optimize inventory, sales, and customer engagement for retail
+                            businesses.</p>
                     </div>
                     <!-- Industry Item End -->
 
@@ -539,7 +592,8 @@
                     <div class="company-growth-item">
                         <h2><span class="counter">10</span>+</h2>
                         <h3>Healthcare</h3>
-                        <p>Innovative solutions to improve patient care, data management, and operational efficiency.</p>
+                        <p>Innovative solutions to improve patient care, data management, and operational
+                            efficiency.</p>
                     </div>
                     <!-- Industry Item End -->
                     <!-- Industry Item Start -->
@@ -585,334 +639,78 @@
             </div>
 
             <div class="col-lg-6">
-                <div class="expertise-list">
-                    <!-- Expertise Item Start -->
-                    <div class="expertise-item wow fadeInUp">
-                        <div class="expertise-image">
-                            <figure class="image-anime">
-                                <img src="{% static 'website/images/expertise-image-1.jpg' %}" alt="">
-                            </figure>
-                        </div>
-                        <div class="expertise-content">
-                            <p>Communication and Planning</p>
-                        </div>
-                    </div>
-                    <!-- Expertise Item End -->
-
-                    <!-- Expertise Item Start -->
-                    <div class="expertise-item wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="expertise-image">
-                            <figure class="image-anime">
-                                <img src="{% static 'website/images/expertise-image-2.jpg' %}" alt="">
-                            </figure>
-                        </div>
-                        <div class="expertise-content">
-                            <p>Requirements Engineering</p>
-                        </div>
-                    </div>
-                    <!-- Expertise Item End -->
-
-                    <!-- Expertise Item Start -->
-                    <div class="expertise-item wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="expertise-image">
-                            <figure class="image-anime">
-                                <img src="{% static 'website/images/expertise-image-3.jpg' %}" alt="">
-                            </figure>
-                        </div>
-                        <div class="expertise-content">
-                            <p>Designing</p>
-                        </div>
-                    </div>
-                    <!-- Expertise Item End -->
-
-                    <!-- Expertise Item Start -->
-                    <div class="expertise-item wow fadeInUp" data-wow-delay="0.8s">
-                        <div class="expertise-image">
-                            <figure class="image-anime">
-                                <img src="{% static 'website/images/expertise-image-4.jpg' %}" alt="">
-                            </figure>
-                        </div>
-                        <div class="expertise-content">
-                            <p>Software Development</p>
-                        </div>
-                    </div>
-                    <!-- Expertise Item End -->
-
-                    <!-- Expertise Item Start -->
-                    <div class="expertise-item wow fadeInUp" data-wow-delay="1s">
-                        <div class="expertise-image">
-                            <figure class="image-anime">
-                                <img src="{% static 'website/images/expertise-image-5.jpg' %}" alt="">
-                            </figure>
-                        </div>
-                        <div class="expertise-content">
-                            <p>Software Testing</p>
-                        </div>
-                    </div>
-                    <!-- Expertise Item End -->
-
-                    <!-- Expertise Item Start -->
-                    <div class="expertise-item wow fadeInUp" data-wow-delay="1.2s">
-                        <div class="expertise-image">
-                            <figure class="image-anime">
-                                <img src="{% static 'website/images/expertise-image-6.jpg' %}" alt="">
-                            </figure>
-                        </div>
-                        <div class="expertise-content">
-                            <p>Deployment</p>
-                        </div>
-                    </div>
-                    <!-- Expertise Item End -->
-
-                    <!-- Expertise Item Start -->
-                    <div class="expertise-item wow fadeInUp" data-wow-delay="1.4s">
-                        <div class="expertise-image">
-                            <figure class="image-anime">
-                                <img src="{% static 'website/images/expertise-image-7.jpg' %}" alt="">
-                            </figure>
-                        </div>
-                        <div class="expertise-content">
-                            <p>Maintenance</p>
-                        </div>
-                    </div>
-                    <!-- Expertise Item End -->
-
-                    <!-- Expertise Item Start -->
-                    <div class="expertise-item wow fadeInUp" data-wow-delay="1.6s">
-                        <div class="expertise-image">
-                            <figure class="image-anime">
-                                <img src="{% static 'website/images/expertise-image-8.jpg' %}" alt="">
-                            </figure>
-                        </div>
-                        <div class="expertise-content">
-                            <p>Evaluation</p>
-                        </div>
-                    </div>
-                    <!-- Expertise Item End -->
-                </div>
+                <figure class="image-anime reveal">
+                    <img src="{% static 'website/images/sdlc.png' %}" style="height: 600px" alt="">
+                </figure>
             </div>
         </div>
     </div>
 
 </div>
-
 <div class="page-blog">
-        <div class="container">
-                <div class="row section-row align-items-center">
-                <div class="col-lg-6">
-                    <!-- Section Title Start -->
-                    <div class="section-title">
-                        <h3 class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">Our Work </h3>
-                        <h2 class="wow fadeInUp" data-wow-delay="0.25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">Our Portfolio <span>Projects</span></h2>
-                    </div>
-                    <!-- Section Title End -->
+    <div class="container">
+        <div class="row section-row align-items-center">
+            <div class="col-lg-6">
+                <!-- Section Title Start -->
+                <div class="section-title">
+                    <h3 class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">Our Work </h3>
+                    <h2 class="wow fadeInUp" data-wow-delay="0.25s"
+                        style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">Our Portfolio
+                        <span>Projects</span></h2>
                 </div>
-
-                <div class="col-lg-6">
-                    <!-- Section Button Start -->
-                    <div class="section-btn wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
-                        <a href="contact.html" class="btn-default">view all</a>
-                    </div>
-                    <!-- Section Button End -->
-                </div>
+                <!-- Section Title End -->
             </div>
-            <div class="row">
-                {% for obj in "123" %}
-                <div class="col-lg-4 col-md-6">
-                    <!-- Post Item Start -->
-                    <div class="post-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-                        <!-- Post Featured Image Start -->
-                        <div class="post-featured-image">
-                            <figure>
-                                <a href="blog-single.html" class="image-anime" data-cursor-text="View">
-                                    <img src="{% static 'website/images/post-1.jpg' %}" alt="">
-                                </a>
-                            </figure>
 
-                            <div class="post-btn">
-                                <a href="blog-single.html"><img src="{% static 'website/images/arrow-white.svg' %}" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Post Item End -->
+            <div class="col-lg-6">
+                <!-- Section Button Start -->
+                <div class="section-btn wow fadeInUp" data-wow-delay="0.5s"
+                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                    <a href="contact.html" class="btn-default">view all</a>
                 </div>
-                {% endfor %}
+                <!-- Section Button End -->
             </div>
         </div>
 
+        <!-- Splide Slider Start -->
+        <div class="splide" id="portfolio-slider">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {% for obj in "123" %}
+                    <li class="splide__slide">
+                        <div class="col-12">
+                            <!-- Post Item Start -->
+                            <div class="post-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                                <!-- Post Featured Image Start -->
+                                <div class="post-featured-image">
+                                    <figure>
+                                        <a href="blog-single.html" class="image-anime" data-cursor-text="View">
+                                            <img src="{% static 'website/images/post-1.jpg' %}" alt="">
+                                        </a>
+                                    </figure>
+                                </div>
+                            </div>
+                            <!-- Post Item End -->
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <!-- Splide Slider End -->
 
     </div>
+</div>
+
+<!-- Include Splide JS -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
 
 
-<!--&lt;!&ndash; Our FAQs Section Start &ndash;&gt;-->
-<!--<div class="our-faqs">-->
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-lg-6">-->
-<!--                &lt;!&ndash; Our FAQs Content Start &ndash;&gt;-->
-<!--                <div class="our-faqs-content">-->
-<!--                    &lt;!&ndash; Section Title Start &ndash;&gt;-->
-<!--                    <div class="section-title">-->
-<!--                        <h3 class="wow fadeInUp">FAQ</h3>-->
-<!--                        <h2 class="wow fadeInUp" data-wow-delay="0.25s">Your coaching questions <span>answered simply here</span>-->
-<!--                        </h2>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; Section Title End &ndash;&gt;-->
+        splide.mount();  // Initialize the slider
+    });
+</script>
 
-<!--                    &lt;!&ndash; FAQs CTA Box Start &ndash;&gt;-->
-<!--                    <div class="faqs-cta-box wow fadeInUp" data-wow-delay="0.75s">-->
-<!--                        &lt;!&ndash; Company Client Images Start &ndash;&gt;-->
-<!--                        <div class="company-client-images">-->
-<!--                            <div class="client-image">-->
-<!--                                <figure class="image-anime">-->
-<!--                                    <img src="{% static 'website/images/satisfy-client-img-1.jpg' %}" alt="">-->
-<!--                                </figure>-->
-<!--                            </div>-->
-<!--                            <div class="client-image">-->
-<!--                                <figure class="image-anime">-->
-<!--                                    <img src="{% static 'website/images/satisfy-client-img-2.jpg' %}" alt="">-->
-<!--                                </figure>-->
-<!--                            </div>-->
-<!--                            <div class="client-image">-->
-<!--                                <figure class="image-anime">-->
-<!--                                    <img src="{% static 'website/images/satisfy-client-img-3.jpg' %}" alt="">-->
-<!--                                </figure>-->
-<!--                            </div>-->
-<!--                            <div class="client-image">-->
-<!--                                <figure class="image-anime">-->
-<!--                                    <img src="{% static 'website/images/satisfy-client-img-4.jpg' %}" alt="">-->
-<!--                                </figure>-->
-<!--                            </div>-->
-<!--                            <div class="client-image">-->
-<!--                                <figure class="image-anime">-->
-<!--                                    <img src="{% static 'website/images/satisfy-client-img-5.jpg' %}" alt="">-->
-<!--                                </figure>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash; Company Client Images End &ndash;&gt;-->
-<!--                        <div class="faqs-cta-content">-->
-<!--                            <h3>Still have you any question?</h3>-->
-<!--                            <p>We're ready to help you to answer any questions.</p>-->
-<!--                            <a href="tel:789859664" class="btn-phone"><i class="fa-solid fa-phone-volume"></i>+01 789-->
-<!--                                859 664</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; FAQs CTA Box End &ndash;&gt;-->
-<!--                </div>-->
-<!--                &lt;!&ndash; Our FAQs Content End &ndash;&gt;-->
-<!--            </div>-->
-
-<!--            <div class="col-lg-6">-->
-<!--                <div class="our-faq-section">-->
-<!--                    &lt;!&ndash; FAQ Accordion Start &ndash;&gt;-->
-<!--                    <div class="faq-accordion" id="faqaccordion">-->
-<!--                        &lt;!&ndash; FAQ Item Start &ndash;&gt;-->
-<!--                        <div class="accordion-item wow fadeInUp">-->
-<!--                            <h2 class="accordion-header" id="heading1">-->
-<!--                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"-->
-<!--                                        data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">-->
-<!--                                    What is a Life & Business Coach?-->
-<!--                                </button>-->
-<!--                            </h2>-->
-<!--                            <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1"-->
-<!--                                 data-bs-parent="#faqaccordion">-->
-<!--                                <div class="accordion-body">-->
-<!--                                    <p>Coaching focuses on future goals, actionable steps, and personal development.-->
-<!--                                        While therapy often deals with healing past issues, coaching is more about-->
-<!--                                        improving present circumstances and building a path forward. Coaches do not-->
-<!--                                        diagnose or treat mental health conditions.</p>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash; FAQ Item End &ndash;&gt;-->
-
-<!--                        &lt;!&ndash; FAQ Item Start &ndash;&gt;-->
-<!--                        <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">-->
-<!--                            <h2 class="accordion-header" id="heading2">-->
-<!--                                <button class="accordion-button " type="button" data-bs-toggle="collapse"-->
-<!--                                        data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">-->
-<!--                                    How does coaching differ from therapy?-->
-<!--                                </button>-->
-<!--                            </h2>-->
-<!--                            <div id="collapse2" class="accordion-collapse collapse show" aria-labelledby="heading2"-->
-<!--                                 data-bs-parent="#faqaccordion">-->
-<!--                                <div class="accordion-body">-->
-<!--                                    <p>Coaching focuses on future goals, actionable steps, and personal development.-->
-<!--                                        While therapy often deals with healing past issues, coaching is more about-->
-<!--                                        improving present circumstances and building a path forward. Coaches do not-->
-<!--                                        diagnose or treat mental health conditions.</p>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash; FAQ Item End &ndash;&gt;-->
-
-<!--                        &lt;!&ndash; FAQ Item Start &ndash;&gt;-->
-<!--                        <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">-->
-<!--                            <h2 class="accordion-header" id="heading3">-->
-<!--                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"-->
-<!--                                        data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">-->
-<!--                                    Who can benefit from life and business coaching?-->
-<!--                                </button>-->
-<!--                            </h2>-->
-<!--                            <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3"-->
-<!--                                 data-bs-parent="#faqaccordion">-->
-<!--                                <div class="accordion-body">-->
-<!--                                    <p>Coaching focuses on future goals, actionable steps, and personal development.-->
-<!--                                        While therapy often deals with healing past issues, coaching is more about-->
-<!--                                        improving present circumstances and building a path forward. Coaches do not-->
-<!--                                        diagnose or treat mental health conditions.</p>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash; FAQ Item End &ndash;&gt;-->
-
-<!--                        &lt;!&ndash; FAQ Item Start &ndash;&gt;-->
-<!--                        <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">-->
-<!--                            <h2 class="accordion-header" id="heading4">-->
-<!--                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"-->
-<!--                                        data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">-->
-<!--                                    How long does the coaching process take?-->
-<!--                                </button>-->
-<!--                            </h2>-->
-<!--                            <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4"-->
-<!--                                 data-bs-parent="#faqaccordion">-->
-<!--                                <div class="accordion-body">-->
-<!--                                    <p>Coaching focuses on future goals, actionable steps, and personal development.-->
-<!--                                        While therapy often deals with healing past issues, coaching is more about-->
-<!--                                        improving present circumstances and building a path forward. Coaches do not-->
-<!--                                        diagnose or treat mental health conditions.</p>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash; FAQ Item End &ndash;&gt;-->
-
-<!--                        &lt;!&ndash; FAQ Item Start &ndash;&gt;-->
-<!--                        <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">-->
-<!--                            <h2 class="accordion-header" id="heading5">-->
-<!--                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"-->
-<!--                                        data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">-->
-<!--                                    Can coaching help my business grow?-->
-<!--                                </button>-->
-<!--                            </h2>-->
-<!--                            <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5"-->
-<!--                                 data-bs-parent="#faqaccordion">-->
-<!--                                <div class="accordion-body">-->
-<!--                                    <p>Coaching focuses on future goals, actionable steps, and personal development.-->
-<!--                                        While therapy often deals with healing past issues, coaching is more about-->
-<!--                                        improving present circumstances and building a path forward. Coaches do not-->
-<!--                                        diagnose or treat mental health conditions.</p>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash; FAQ Item End &ndash;&gt;-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; FAQ Accordion End &ndash;&gt;-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--&lt;!&ndash; Our FAQs Section End &ndash;&gt;-->
 
 <!-- Our Testimonial Section Start -->
 <div class="our-testimonial bg-section">
@@ -1245,7 +1043,7 @@
             </div>
         </div>
     </div>
-     <!-- Scrolling Ticker Start -->
+    <!-- Scrolling Ticker Start -->
     <div class="scrolling-ticker work-ticker">
         <div class="container-fluid">
             <div class="row">
@@ -1281,4 +1079,65 @@
     </div>
     <!-- Scrolling Ticker End -->
 </div>
+
 {% endblock %}
+
+{% block extra_js %}
+<!-- Include Splide JS -->
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.11/dist/js/splide.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const techsplide = new Splide('#tech-icons-slider', {
+            type: 'loop',
+            drag: 'free',
+            focus: 'center',
+            perPage: 3,
+            breakpoints: {
+                1200: {
+                    perPage: 3,   // On large screens, show 3 slides
+                },
+                768: {
+                    perPage: 2,
+                },
+                576: {
+                    perPage: 1,
+                },
+            },
+        });
+
+        techsplide.mount();  // Initialize the slider
+
+
+        const portfolio_splide = new Splide('#portfolio-slider', {
+            type: 'loop',
+            perPage: 3,  // Display 3 items per slide on large screens
+            perMove: 1,
+            drag: 'free',
+            focus: 'center',
+            gap: '30px',
+            arrows: true,  // Show next/prev arrows
+            breakpoints: {
+                1200: {
+                    perPage: 3,  // 3 items per slide on large screens
+                },
+                768: {
+                    perPage: 2,  // 2 items per slide on medium screens
+                },
+                576: {
+                    perPage: 1,  // 1 item per slide on small screens
+                },
+            },
+        });
+        portfolio_splide.mount();  // Initialize the slider
+
+        // Auto-scroll functionality
+        const interval = 2000; // Time between scrolls (in milliseconds)
+        setInterval(() => {
+            techsplide.go('>');
+            portfolio_splide.go('>');
+        }, interval); // Move to next slide every 2 seconds
+
+    });
+</script>
+{% endblock extra_js %}
