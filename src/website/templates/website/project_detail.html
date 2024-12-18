@@ -280,11 +280,13 @@
         {% for obj in '123' %}
         <div class="row ">
             <div class="col-lg-6 mb-3">
+<!--                <h4>User Experience Challenges:</h4>-->
                 <div class="d-flex">
 
                     <img src="{% static 'website/images/challenge.png' %}"/>
-                    <h4 class="mt-4">CHALLENGE</h4>
+                    <h5 class="mt-4">CHALLENGE</h5>
                 </div>
+
                 Ensuring Data Security for User Transactions
                 Working with sensitive data, like user information and financial transactions, called for a strong
                 security structure. To function properly, the app needed to adhere to rigorous data privacy rules and
@@ -294,7 +296,7 @@
                 obstacle was to ensure efficient scale-up of the backend to fulfill the needs of thousands of betting
                 transactions simultaneously, while avoiding slowness or server outages.
             </div>
-            <div class="col-lg-6 mt-4">
+            <div class="col-lg-6" style="margin-top: 90px;">
                 <div class="card shadow p-4">
                     <div class="card-body">
                         <div class="d-flex">
@@ -313,6 +315,7 @@
                 </div>
             </div>
         </div>
+
         {% endfor %}
     </div>
 

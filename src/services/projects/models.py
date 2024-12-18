@@ -105,6 +105,7 @@ class ProjectKeyFeature(models.Model):
 class ProjectChallenge(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='challenges')
+    name = models.CharField(max_length=255, help_text='Enter the project challenge name', verbose_name='Challenge Name')
     challenge = CKEditor5Field('Challenge', config_name='extends', help_text='Enter the project challenge')
     solution = CKEditor5Field('Solution', config_name='extends', help_text='Enter the project solution')
 
