@@ -4,6 +4,8 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.11/dist/css/splide.min.css">
+<script type="module"
+        src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 {% endblock extra_head %}
 {% block extra_css %}
 <style>
@@ -41,22 +43,7 @@
 {% endblock extra_css%}
 {% block content %}
 <!-- Hero Section Start -->
-<div class="hero bg-section hero-video">
-    <!-- Video Start -->
-    <div class="hero-bg-video">
-        <!-- Selfhosted Video Start -->
-        <!-- <video autoplay muted loop id="myVideo"><source src="{%static 'website/images/hero-bg-video.mp4' %}" type="video/mp4"></video> -->
-        <video autoplay muted loop id="myVideo">
-            <source src="https://demo.awaikenthemes.com/assets/videos/infine-video.mp4" type="video/mp4">
-        </video>
-
-        <!-- Selfhosted Video End -->
-
-        <!-- Youtube Video Start -->
-        <!-- <div id="herovideo" class="player" data-property="{videoURL:'74DWwSxsVSs',containment:'.hero-video', showControls:false, autoPlay:true, loop:true, vol:0, mute:false, startAt:0,  stopAt:296, opacity:1, addRaster:true, quality:'large', optimizeDisplay:true}"></div> -->
-        <!-- Youtube Video End -->
-    </div>
-    <!-- Video End -->
+<div class="hero bg-section parallaxie">
     <div class="hero-section">
         <div class="container-fluid">
             <div class="row">
@@ -88,7 +75,7 @@
                         <!-- Export Coaching Step Start -->
                         <div class="export-coaching-step">
                             <div class="icon-box">
-                                <img src="{%static 'website/images/icon-export-coaching-1.svg' %}" alt="">
+                                <img src="images/icon-export-coaching-1.svg" alt="">
                             </div>
                             <div class="export-coaching-step-content">
                                 <p>Tailored Coaching Solutions for growth.</p>
@@ -99,7 +86,7 @@
                         <!-- Export Coaching Step Start -->
                         <div class="export-coaching-step">
                             <div class="icon-box">
-                                <img src="{%static 'website/images/icon-export-coaching-2.svg' %}" alt="">
+                                <img src="images/icon-export-coaching-2.svg" alt="">
                             </div>
                             <div class="export-coaching-step-content">
                                 <p>Proven Coaching Techniques Backed.</p>
@@ -110,7 +97,7 @@
                         <!-- Export Coaching Step Start -->
                         <div class="export-coaching-step">
                             <div class="icon-box">
-                                <img src="{%static 'website/images/icon-export-coaching-3.svg' %}" alt="">
+                                <img src="images/icon-export-coaching-3.svg" alt="">
                             </div>
                             <div class="export-coaching-step-content">
                                 <p>Holistic Life and Business Coaching.</p>
@@ -121,7 +108,7 @@
                         <!-- Export Coaching Step Start -->
                         <div class="export-coaching-step">
                             <div class="icon-box">
-                                <img src="{%static 'website/images/icon-export-coaching-4.svg' %}" alt="">
+                                <img src="images/icon-export-coaching-4.svg" alt="">
                             </div>
                             <div class="export-coaching-step-content">
                                 <p>Flexible Client Centered Coaching Program.</p>
@@ -132,7 +119,7 @@
                         <!-- Export Coaching Step Start -->
                         <div class="export-coaching-step">
                             <div class="icon-box">
-                                <img src="{%static 'website/images/icon-export-coaching-5.svg' %}" alt="">
+                                <img src="images/icon-export-coaching-5.svg" alt="">
                             </div>
                             <div class="export-coaching-step-content">
                                 <p>Expert Guidance with Ongoing Support.</p>
@@ -144,8 +131,7 @@
             </div>
         </div>
     </div>
-</div>
-<!-- Hero Section End -->
+</div><!-- Hero Section End -->
 
 <!-- About Us Section Start -->
 <div class="about-us">
@@ -164,9 +150,21 @@
 
                     <!-- About Us Img Start -->
                     <div class="about-us-img-2">
-                        <figure class="image-anime">
-                            <img src="{% static 'website/images/about-us-img-2.jpg' %}" alt="">
-                        </figure>
+
+
+                        <!-- Use it like any other HTML element -->
+                        <model-viewer
+                                src="{% static 'website/images/model/model.gltf' %}"
+                                alt="3D Model"
+                                auto-rotate
+                                camera-controls
+                                disable-zoom
+                                rotation-per-second="60deg"
+                                disable-tap
+                                interaction-prompt="none"
+
+                                style="height: 250px;">
+                        </model-viewer>
                     </div>
                     <!-- About Us Img End -->
 
@@ -1095,7 +1093,7 @@
             perPage: 3,
             breakpoints: {
                 1200: {
-                    perPage: 3,   // On large screens, show 3 slides
+                    perPage: 2,   // On large screens, show 3 slides
                 },
                 768: {
                     perPage: 2,
@@ -1119,7 +1117,7 @@
             arrows: true,  // Show next/prev arrows
             breakpoints: {
                 1200: {
-                    perPage: 3,  // 3 items per slide on large screens
+                    perPage: 2,  // 3 items per slide on large screens
                 },
                 768: {
                     perPage: 2,  // 2 items per slide on medium screens
