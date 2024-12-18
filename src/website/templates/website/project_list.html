@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% block subtitle %} Services {% endblock %}
+{% load static %}
+{% block content %}
+<style>
+    /* Ensure the card is relatively positioned */
+    .card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 30px;
+    }
+
+    /* Overlay for the entire card */
+    .card-slider-overlay {
+        position: absolute;
+        bottom: -100%; /* Hidden initially */
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgb(101, 0, 0); /* Dark semi-transparent background */
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        transition: bottom 0.5s ease; /* Smooth sliding animation */
+        padding: 20px;
+        z-index: 2;
+        flex-direction: column;
+    }
+
+    /* Style for the content inside the overlay */
+    .slider-content {
+        font-size: 16px;
+        line-height: 1.5;
+        padding: 15px;
+    }
+
+    /* Button styling */
+    .card-slider-overlay .btn {
+        background-color: #ff9800; /* Customize button color */
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .card-slider-overlay .btn:hover {
+        background-color: #e68900; /* Slightly darker on hover */
+    }
+
+    /* Hover effect to slide in the overlay */
+    .card:hover .card-slider-overlay {
+        bottom: 0; /* Slide in from the bottom on hover */
+    }
+
+</style>
+<!-- Page Header Start -->
+<div class="page-header bg-section ">
+    <!-- Page Header Box Start -->
+    <div class="page-header-box">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Page Header Content Start -->
+                    <div class="page-header-content">
+                        <h1 class="wow fadeInUp">Our <span>Projects</span></h1>
+                    </div>
+                    <!-- Page Header Content End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header Box End -->
+</div>
+<!-- Page Header End -->
+<div class="page-blog">
+    <div class="container">
+        <div class="row section-row align-items-center">
+            <div class="col-lg-6">
+                <!-- Section Title Start -->
+                <div class="section-title">
+                    <h2 class="wow fadeInUp" data-wow-delay="0.25s"
+                        style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">Partnering with
+                        top experts <span>and organizations</span></h2>
+                </div>
+                <!-- Section Title End -->
+            </div>
+
+            <div class="col-lg-6 text-end">
+                <!-- Contact Circle Start -->
+                <div class="contact-circle">
+                    <img src="/static/website/images/contact-now-circle.svg" alt="">
+                </div>
+                <!-- Contact Circle End -->
+            </div>
+        </div>
+        <!-- Splide Slider -->
+        <div class="splide" id="image-slider">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {% for obj in '123456' %}
+                    <li class="splide__slide">
+                        <div class="col-lg-12 col-md-12 mb-4">
+                            <div class="card p-3">
+                                <!--                                <img src="/static/website/images/post-1.jpg" alt="AI Image">-->
+                                <h6 class="">Artificial Intelligence</h6>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Initialize Splide.js -->
+
+        <div class="row">
+            {% for obj in '1234' %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card p-3 position-relative overflow-hidden">
+                    <div class="post-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                        <!-- Post Featured Image Start -->
+                        <div class="post-featured-image">
+                            <figure>
+                                <a href="blog-single.html" class="image-anime" data-cursor-text="View">
+                                    <img src="/static/website/images/post-1.jpg" alt="">
+                                </a>
+                            </figure>
+                        </div>
+                        <!-- Post Featured Image End -->
+
+                        <!-- Post Item Content Start -->
+                        <div class="post-item-content">
+                            <h2><a href="blog-single.html">Mental Wellness and Resilience: The Power of Coaching</a>
+                            </h2>
+                            <p>Mental wellness and resilience are crucial for navigating life's challenges.</p>
+                        </div>
+                        <!-- Post Item Content End -->
+
+                        <!-- Slider Overlay with Button -->
+                        <div class="card-slider-overlay">
+                            <div class="slider-content">
+                                <p><img src="https://placeholder.io?100"></p>
+                                <p>⭐⭐⭐⭐⭐</p>
+                                <p>“This coaching session significantly improved my mental resilience!”</p>
+                                <a href="blog-single.html" class="btn btn-primary mt-3">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-lg-12">
+                <!-- Page Pagination Start -->
+                <div class="page-pagination wow fadeInUp" data-wow-delay="1.2s"
+                     style="visibility: hidden; animation-delay: 1.2s; animation-name: none;">
+                    <ul class="pagination">
+                        <li><a href="#"><i class="fa-solid fa-arrow-left-long"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="fa-solid fa-arrow-right-long"></i></a></li>
+                    </ul>
+                </div>
+                <!-- Page Pagination End -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var splide = new Splide('#image-slider', {
+            type: 'loop', // Makes the slider loop
+            perPage: 6,       // Number of slides per page
+            perMove: 1,
+            drag: 'free',
+            focus: 'center',
+            gap: '30px',
+            autoplay: true,     // Auto transition between slides
+            arrows: false,     // Enable arrows (optional)
+            breakpoints: {
+                1200: {
+                    perPage: 5,  // 3 items per slide on large screens
+                },
+                900: {
+                    perPage: 4,  // 2 items per slide on medium screens
+                },
+                576: {
+                    perPage: 2,  // 1 item per slide on small screens
+                },
+            },
+        });
+
+
+        splide.mount();
+        // Auto-scroll functionality
+        const interval = 3000; // Time between scrolls (in milliseconds)
+        setInterval(() => {
+            splide.go('>');
+        }, interval); // Move to next slide every 2 seconds
+    });
+</script>
+
+{% endblock extra_js %}
+
+
