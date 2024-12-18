@@ -8,6 +8,7 @@
         position: relative;
         overflow: hidden;
         border-radius: 30px;
+        padding: 5px;
     }
 
     /* Overlay for the entire card */
@@ -103,9 +104,13 @@
                     {% for obj in '123456' %}
                     <li class="splide__slide">
                         <div class="col-lg-12 col-md-12 mb-4">
-                            <div class="card p-3">
-                                <!--                                <img src="/static/website/images/post-1.jpg" alt="AI Image">-->
-                                <h6 class="">Artificial Intelligence</h6>
+                            <div class="card ">
+                                <div class="card-body d-flex align-items-center">
+                                    <img src="/static/website/images/post-1.jpg" alt="AI Image" class="me-2"
+                                         style="height: 40px; width: 40px;">
+                                    <h6 class="mb-0">Artificial Intelligence</h6>
+                                </div>
+
                             </div>
                         </div>
                     </li>
@@ -187,7 +192,7 @@
             arrows: false,     // Enable arrows (optional)
             breakpoints: {
                 1200: {
-                    perPage: 5,  // 3 items per slide on large screens
+                    perPage: 4,  // 3 items per slide on large screens
                 },
                 900: {
                     perPage: 4,  // 2 items per slide on medium screens
