@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block subtitle %} Home {% endblock %}
 {% load static %}
+{% load custom_tags %}
 
 {% block extra_head %}
 <script type="module"
@@ -23,6 +24,52 @@
         overflow: hidden;
 
     }
+
+    /* Overlay for the entire card */
+    .card-slider-overlay {
+        position: absolute;
+        bottom: -100%; /* Hidden initially */
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgb(101, 0, 0); /* Dark semi-transparent background */
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        transition: bottom 0.5s ease; /* Smooth sliding animation */
+        padding: 20px;
+        z-index: 1;
+        flex-direction: column;
+    }
+
+    /* Style for the content inside the overlay */
+    .slider-content {
+        font-size: 16px;
+        line-height: 1.5;
+        padding: 15px;
+    }
+
+    /* Button styling */
+    .card-slider-overlay .btn {
+        background-color: #ff9800; /* Customize button color */
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .card-slider-overlay .btn:hover {
+        background-color: #e68900; /* Slightly darker on hover */
+    }
+
+    /* Hover effect to slide in the overlay */
+    .card:hover .card-slider-overlay {
+        bottom: 0; /* Slide in from the bottom on hover */
+    }
+
 
     .splide__arrow {
         position: absolute;
@@ -51,9 +98,9 @@
                     <div class="hero-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">Welcome to infine.</h3>
-                            <h1 class="wow fadeInUp" data-wow-delay="0.2s">Expert your life &
-                                <span>business coaching</span></h1>
+                            <h3 class="wow fadeInUp">Welcome to Exarth.</h3>
+                            <h1 class="wow fadeInUp" data-wow-delay="0.2s">
+                                <span>An Auth </span>We Have Taken</h1>
                         </div>
                         <!-- Section Title End -->
 
@@ -300,7 +347,7 @@
 
                     <!-- Service Btn Start -->
                     <div class="service-btn wow fadeInUp" data-wow-delay="0.75s">
-                        <a href="service_list.html" class="btn-default">view all services</a>
+                        <a href="{% url 'website:services' %}" class="btn-default">view all services</a>
                     </div>
                     <!-- Service Btn End -->
                 </div>
@@ -312,88 +359,26 @@
                 <!-- Service Item List Start -->
                 <div class="service-item-list">
                     <!-- Service Item Start -->
+                    {% for object in services %}
                     <div class="service-item wow fadeInUp">
                         <div class="icon-box">
-                            <img src="{% static 'website/images/icon-services-1.svg' %}" alt="">
+                            <img src="{{object.thumbnail_image|image_or_placeholder}}" alt="">
                         </div>
 
                         <div class="service-item-content">
-                            <h3>personal coaching</h3>
-                            <p>One-on-one sessions to achieve personal goals and enhance self-awareness.</p>
+                            <h3>{{object.title}}</h3>
+                            <p>{{object.short_description}}</p>
                         </div>
                     </div>
-                    <!-- Service Item Start -->
-
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="icon-box">
-                            <img src="{% static 'website/images/icon-services-2.svg' %}" alt="">
-                        </div>
-
-                        <div class="service-item-content">
-                            <h3>business coaching</h3>
-                            <p>One-on-one sessions to achieve personal goals and enhance self-awareness.</p>
-                        </div>
-                    </div>
-                    <!-- Service Item Start -->
-
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="icon-box">
-                            <img src="{% static 'website/images/icon-services-3.svg' %}" alt="">
-                        </div>
-
-                        <div class="service-item-content">
-                            <h3>career development</h3>
-                            <p>Guidance on career transitions, job search strategies, and skill enhancement.</p>
-                        </div>
-                    </div>
-                    <!-- Service Item Start -->
-
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="icon-box">
-                            <img src="{% static 'website/images/icon-services-4.svg' %}" alt="">
-                        </div>
-
-                        <div class="service-item-content">
-                            <h3>team coaching</h3>
-                            <p>Enhancing teamwork, collaboration, and communication within organizations.</p>
-                        </div>
-                    </div>
-                    <!-- Service Item Start -->
-
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.8s">
-                        <div class="icon-box">
-                            <img src="{% static 'website/images/icon-services-5.svg' %}" alt="">
-                        </div>
-
-                        <div class="service-item-content">
-                            <h3>relationship coaching</h3>
-                            <p>Guidance on career transitions, job search strategies, and skill enhancement.</p>
-                        </div>
-                    </div>
-                    <!-- Service Item Start -->
-
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="1s">
-                        <div class="icon-box">
-                            <img src="{% static 'website/images/icon-services-6.svg' %}" alt="">
-                        </div>
-
-                        <div class="service-item-content">
-                            <h3>spiritual coaching</h3>
-                            <p>Enhancing teamwork, collaboration, and communication within organizations.</p>
-                        </div>
-                    </div>
+                    {% endfor %}
                     <!-- Service Item Start -->
                 </div>
                 <!-- Service Item List End -->
 
                 <!-- Service Footer Start -->
                 <div class="service-footer wow fadeInUp" data-wow-delay="0.25s">
-                    <p><span>free</span> Let's make something great work together. <a href="contact.html">get free
+                    <p><span>free</span> Let's make something great work together. <a
+                            href="{% url 'website:contact' %}">get free
                         quote</a></p>
                 </div>
                 <!-- Service Footer Start -->
@@ -485,41 +470,18 @@
             <div class="splide" id="tech-icons-slider">
                 <div class="splide__track">
                     <ul class="splide__list" data-cursor-text="Drag">
-                        {% for object in '123' %}
+                        {% for object in technologies %}
                         <li class="splide__slide">
                             <div class="col-lg-12 p-1">
                                 <div class="card  mb-4 rounded border border-danger"
                                      style="border-radius: 15px;padding-left: 18px">
                                     <div class="card-body">
-                                        <h5 class="card-title mb-3">Frontend Development</h5>
-                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
-                                             alt="HTML">
-                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
-                                             alt="HTML">
-                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
-                                             alt="HTML">
-                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
-                                             alt="HTML">
-                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
-                                             alt="HTML">
-                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
-                                             alt="HTML">
-                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
-                                             alt="HTML">
-                                        <img src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
-                                             alt="HTML">
-                                        <img src="{% static 'website/images/python.png' %}"
+                                        <h5 class="card-title mb-3">{{object.title}}</h5>
+                                        {% for obj in object.get_sub_technologies %}
+                                        <img src="{{obj.thumbnail_image|image_or_placeholder}}"
                                              class="tech-icon me-2 mb-2"
                                              alt="HTML">
-                                        <img
-                                                src="{% static 'website/images/python.png' %}"
-                                                class="tech-icon me-2 mb-2"
-                                                alt="HTML">
-                                        <img src="{% static 'website/images/python.png' %}"
-                                             class="tech-icon me-2 mb-2"
-                                             alt="HTML"><img
-                                            src="{% static 'website/images/python.png' %}" class="tech-icon me-2 mb-2"
-                                            alt="HTML">
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -662,7 +624,7 @@
                 <!-- Section Button Start -->
                 <div class="section-btn wow fadeInUp" data-wow-delay="0.5s"
                      style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
-                    <a href="contact.html" class="btn-default">view all</a>
+                    <a href="{% url 'website:project-list' %}" class="btn-default">view all</a>
                 </div>
                 <!-- Section Button End -->
             </div>
@@ -672,21 +634,45 @@
         <div class="splide" id="portfolio-slider">
             <div class="splide__track">
                 <ul class="splide__list">
-                    {% for obj in "123" %}
+                    {% for obj in projects %}
                     <li class="splide__slide">
-                        <div class="col-12">
-                            <!-- Post Item Start -->
-                            <div class="post-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-                                <!-- Post Featured Image Start -->
-                                <div class="post-featured-image">
-                                    <figure>
-                                        <a href="blog-single.html" class="image-anime" data-cursor-text="View">
-                                            <img src="{% static 'website/images/post-1.jpg' %}" alt="">
-                                        </a>
-                                    </figure>
+                        <div class="col-lg-12 col-md-12 mb-4">
+                            <div class="card p-3 rounded-4 position-relative  border border-danger overflow-hidden">
+                                <div class="post-item wow fadeInUp"
+                                     style="visibility: visible; animation-name: fadeInUp;">
+                                    <!-- Post Featured Image Start -->
+                                    <div class="post-featured-image">
+                                        <figure>
+                                            <img src="{{obj.thumbnail_image.url}}" alt="">
+                                        </figure>
+                                    </div>
+                                    <!-- Post Featured Image End -->
+
+                                    <!-- Post Item Content Start -->
+                                    <div class="post-item-content">
+                                        <img src="{% static 'website/images/tier.png' %}" style="height:70px;"
+                                             alt="rating"
+                                             class="ms-auto float-end me-2">
+                                        <h2>{{obj.title}}
+                                        </h2>
+                                        <small class="text-secondary">{{obj.tag_line}}</small>
+                                        <p>{{obj.short_description}}</p>
+                                    </div>
+                                    <!-- Post Item Content End -->
+
+                                    <!-- Slider Overlay with Button -->
+                                    <div class="card-slider-overlay">
+                                        <div class="slider-content">
+                                            <p><img src="https://placeholder.io?100"></p>
+                                            <p>⭐⭐⭐⭐⭐</p>
+                                            <p>“This coaching session significantly improved my mental resilience!”</p>
+                                            <a href="{% url 'website:project-detail' obj.pk %}"
+                                               class="btn btn-primary mt-3">Read
+                                                More</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Post Item End -->
                         </div>
                     </li>
                     {% endfor %}
@@ -697,16 +683,6 @@
 
     </div>
 </div>
-
-<!-- Include Splide JS -->
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-
-        splide.mount();  // Initialize the slider
-    });
-</script>
 
 
 <!-- Our Testimonial Section Start -->
@@ -731,22 +707,24 @@
                     <div class="swiper">
                         <div class="swiper-wrapper" data-cursor-text="Drag">
                             <!-- Testimonial Slide Start -->
+                            {% for object in project_testimonials %}
                             <div class="swiper-slide">
                                 <div class="testimonial-item">
                                     <div class="testimonial-slider-image">
                                         <figure class="image-anime">
-                                            <img src="{% static 'website/images/testimonial-img-1.jpg' %}" alt="">
+                                            <img src="{{object.customer.thumbnail_image|image_or_placeholder}}"
+                                                 alt="">
                                         </figure>
                                     </div>
 
                                     <div class="testimonial-slider-content">
                                         <div class="testimonial-header">
                                             <div class="testimonial-rating-company">
-                                                <img src="{% static 'website/images/icon-testimonial-rating-4.svg' %}"
+                                                <img src="{{object.project.logo|image_or_placeholder}}"
                                                      alt="">
                                             </div>
                                             <div class="testimonial-quote">
-                                                <img src="{% static 'website/images/testimonial-quote.svg' %}" alt="">
+                                                <img src="/static/website/images/testimonial-quote.svg" alt="">
                                             </div>
                                         </div>
                                         <div class="testimonial-rating">
@@ -757,98 +735,18 @@
                                             <i class="fa-solid fa-star"></i>
                                         </div>
                                         <div class="testimonial-content">
-                                            <p>Our backyard has been completely transformed! The team was professional,
-                                                attentive, and delivered beyond our expectations. the quality of work is
-                                                outstanding.</p>
+                                            <p>{{object.testimonial}}</p>
                                         </div>
                                         <div class="author-content">
-                                            <h3>annette black</h3>
-                                            <p>Sr. Gardener</p>
+                                            <h3>{{object.customer.name}}</h3>
+                                            <p>{{object.customer.designation}}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            {% endfor %}
                             <!-- Testimonial Slide End -->
 
-                            <!-- Testimonial Slide Start -->
-                            <div class="swiper-slide">
-                                <div class="testimonial-item">
-                                    <div class="testimonial-slider-image">
-                                        <figure class="image-anime">
-                                            <img src="{% static 'website/images/testimonial-img-2.jpg' %}" alt="">
-                                        </figure>
-                                    </div>
-
-                                    <div class="testimonial-slider-content">
-                                        <div class="testimonial-header">
-                                            <div class="testimonial-rating-company">
-                                                <img src="{% static 'website/images/icon-testimonial-rating-4.svg' %}"
-                                                     alt="">
-                                            </div>
-                                            <div class="testimonial-quote">
-                                                <img src="{% static 'website/images/testimonial-quote.svg' %}" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>Our backyard has been completely transformed! The team was professional,
-                                                attentive, and delivered beyond our expectations. the quality of work is
-                                                outstanding.</p>
-                                        </div>
-                                        <div class="author-content">
-                                            <h3>claire peterson</h3>
-                                            <p>content writer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Testimonial Slide End -->
-
-                            <!-- Testimonial Slide Start -->
-                            <div class="swiper-slide">
-                                <div class="testimonial-item">
-                                    <div class="testimonial-slider-image">
-                                        <figure class="image-anime">
-                                            <img src="{% static 'website/images/testimonial-img-3.jpg' %}" alt="">
-                                        </figure>
-                                    </div>
-
-                                    <div class="testimonial-slider-content">
-                                        <div class="testimonial-header">
-                                            <div class="testimonial-rating-company">
-                                                <img src="{% static 'website/images/icon-testimonial-rating-4.svg' %}"
-                                                     alt="">
-                                            </div>
-                                            <div class="testimonial-quote">
-                                                <img src="{% static 'website/images/testimonial-quote.svg' %}" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="testimonial-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            <p>Our backyard has been completely transformed! The team was professional,
-                                                attentive, and delivered beyond our expectations. the quality of work is
-                                                outstanding.</p>
-                                        </div>
-                                        <div class="author-content">
-                                            <h3>natalie brooks</h3>
-                                            <p>graphic designer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Testimonial Slide End -->
                         </div>
                         <div class="testimonial-btn">
                             <div class="testimonial-button-prev"></div>
@@ -930,7 +828,7 @@
 
                     <!-- Our Blog Button Start -->
                     <div class="our-blog-btn wow fadeInUp" data-wow-delay="0.5s">
-                        <a href="contact.html" class="btn-default">contact us</a>
+                        <a href="{% url 'website:contact' %}" class="btn-default">contact us</a>
                     </div>
                     <!-- Our Blog Button End -->
                 </div>
@@ -941,12 +839,14 @@
                 <!-- Blog Box Start -->
                 <div class="blog-box">
                     <!-- Blog Item Start -->
+                    {% for obj in latest_blogs %}
                     <div class="blog-item wow fadeInUp">
                         <!-- Blog Featured Image Start -->
                         <div class="blog-featured-image">
-                            <a href="blog-single.html" class="image-anime" data-cursor-text="View">
+                            <a href="{% url 'website:blog-detail' obj.pk %}" class="image-anime"
+                               data-cursor-text="View">
                                 <figure>
-                                    <img src="{% static 'website/images/post-1.jpg' %}" alt="">
+                                    <img src="{{obj.thumbnail_image|image_or_placeholder}}" alt="">
                                 </figure>
                             </a>
                         </div>
@@ -956,84 +856,21 @@
                         <div class="blog-item-body">
                             <!-- Blog Item Content Start -->
                             <div class="blog-item-content">
-                                <h2><a href="blog-single.html">Mental Wellness and Resilience The Power of Coaching</a>
+                                <h2><a href="{% url 'website:blog-detail' obj.pk %}">{{obj.title}}</a>
                                 </h2>
-                                <p>Mental wellness and resilience are crucial for navigating life's challenges.</p>
+                                <p>{{ obj.content|truncatewords:20|safe }}</p>
                             </div>
                             <!-- Blog Item Content End -->
 
                             <!-- Blog Item Button Start -->
                             <div class="blog-item-btn">
-                                <a href="blog-single.html" class="btn-default">read more</a>
+                                <a href="{% url 'website:blog-detail' obj.pk %}" class="btn-default">read more</a>
                             </div>
                             <!-- Blog Item Button End -->
                         </div>
                         <!-- Blog Item Body End -->
                     </div>
-                    <!-- Blog Item End -->
-
-                    <!-- Blog Item Start -->
-                    <div class="blog-item wow fadeInUp" data-wow-delay="0.25s">
-                        <!-- Blog Featured Image Start -->
-                        <div class="blog-featured-image">
-                            <a href="blog-single.html" class="image-anime" data-cursor-text="View">
-                                <figure>
-                                    <img src="{% static 'website/images/post-2.jpg' %}" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Blog Featured Image End -->
-
-                        <!-- Blog Item Body Start -->
-                        <div class="blog-item-body">
-                            <!-- Blog Item Content Start -->
-                            <div class="blog-item-content">
-                                <h2><a href="blog-single.html">How to Maintain Work-Life Balance in a Busy World</a>
-                                </h2>
-                                <p>Maintaining work-life balance in today's fast-paced world can be challenging.</p>
-                            </div>
-                            <!-- Blog Item Content End -->
-
-                            <!-- Blog Item Button Start -->
-                            <div class="blog-item-btn">
-                                <a href="blog-single.html" class="btn-default">read more</a>
-                            </div>
-                            <!-- Blog Item Button End -->
-                        </div>
-                        <!-- Blog Item Body End -->
-                    </div>
-                    <!-- Blog Item End -->
-
-                    <!-- Blog Item Start -->
-                    <div class="blog-item wow fadeInUp" data-wow-delay="0.5s">
-                        <!-- Blog Featured Image Start -->
-                        <div class="blog-featured-image">
-                            <a href="blog-single.html" class="image-anime" data-cursor-text="View">
-                                <figure>
-                                    <img src="{% static 'website/images/post-3.jpg' %}" alt="">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- Blog Featured Image End -->
-
-                        <!-- Blog Item Body Start -->
-                        <div class="blog-item-body">
-                            <!-- Blog Item Content Start -->
-                            <div class="blog-item-content">
-                                <h2><a href="blog-single.html">The Power of Mindset Transforming Your Life &
-                                    Business</a></h2>
-                                <p>A positive mindset fuels growth, success, and resilience in life and business.</p>
-                            </div>
-                            <!-- Blog Item Content End -->
-
-                            <!-- Blog Item Button Start -->
-                            <div class="blog-item-btn">
-                                <a href="blog-single.html" class="btn-default">read more</a>
-                            </div>
-                            <!-- Blog Item Button End -->
-                        </div>
-                        <!-- Blog Item Body End -->
-                    </div>
+                    {% endfor %}
                     <!-- Blog Item End -->
                 </div>
                 <!-- Blog Box End -->

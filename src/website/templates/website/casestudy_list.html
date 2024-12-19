@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block subtitle %} Blogs {% endblock %}
+{% load static %}
+{% block content %}
+{% load custom_tags %}
+
+<!-- Page Header Start -->
+<div class="page-header bg-section">
+    <!-- Page Header Box Start -->
+    <div class="page-header-box">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Page Header Content Start -->
+                    <div class="page-header-content">
+                        <h1 class="wow fadeInUp">Case <span>Studies</span></h1>
+                    </div>
+                    <!-- Page Header Content End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header Box End -->
+</div>
+<!-- Page Header End -->
+
+<!-- Page Blog Start -->
+<div class="page-blog">
+    <div class="container">
+        <div class="row">
+            {% for obj in object_list %}
+            <div class="col-lg-4 col-md-6">
+                <!-- Post Item Start -->
+                <div class="post-item wow fadeInUp">
+                    <!-- Post Featured Image Start -->
+                    <div class="post-featured-image">
+                        <figure>
+                            <a href="{% url 'website:case-study-detail' obj.pk %}" class="image-anime" data-cursor-text="View">
+                                <img src="{{obj.thumbnail_image|image_or_placeholder}}" alt="">
+                            </a>
+                        </figure>
+
+                        <div class="post-btn">
+                            <a href="{% url 'website:case-study-detail' obj.pk %}"><img src="{%static 'website/images/arrow-white.svg' %}"
+                                                            alt=""></a>
+                        </div>
+                    </div>
+                    <!-- Post Featured Image End -->
+
+                    <!-- Post Item Content Start -->
+                    <div class="post-item-content">
+                        <h2><a href="{% url 'website:case-study-detail' obj.pk %}">{{obj.title}}</a></h2>
+                        <p>{{ obj.content|truncatewords:20|safe }}</p>
+                    </div>
+                    <!-- Post Item Content End -->
+                </div>
+                <!-- Post Item End -->
+            </div>
+            {% endfor %}
+            <div class="col-lg-12">
+                <!-- Page Pagination Start -->
+                <div class="page-pagination wow fadeInUp" data-wow-delay="1.2s">
+                    <ul class="pagination">
+                        <li><a href="#"><i class="fa-solid fa-arrow-left-long"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="fa-solid fa-arrow-right-long"></i></a></li>
+                    </ul>
+                </div>
+                <!-- Page Pagination End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Blog End -->
+
+{% endblock %}

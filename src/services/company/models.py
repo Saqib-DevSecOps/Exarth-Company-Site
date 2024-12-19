@@ -87,7 +87,8 @@ class Application(models.Model):
     )
 
     contact_email1 = models.EmailField(max_length=100, default='support@exarth.com', help_text='Primary contact email')
-    contact_email2 = models.EmailField(max_length=100, default='support@exarth.com', help_text='Secondary contact email')
+    contact_email2 = models.EmailField(max_length=100, default='support@exarth.com',
+                                       help_text='Secondary contact email')
     contact_phone1 = PhoneNumberField(help_text='Primary contact phone')
     contact_phone2 = PhoneNumberField(help_text='Secondary contact phone')
 
@@ -95,7 +96,8 @@ class Application(models.Model):
     latitude = models.DecimalField(max_digits=10, decimal_places=6, default=23.7, help_text='Latitude')
     longitude = models.DecimalField(max_digits=10, decimal_places=6, default=90.3, help_text='Longitude')
 
-    terms_url = models.URLField(max_length=255, default='https://exarth.com/terms-of-use/', help_text='Terms of use link')
+    terms_url = models.URLField(max_length=255, default='https://exarth.com/terms-of-use/',
+                                help_text='Terms of use link')
 
     facebook = models.URLField(max_length=255, default='https://facebook.com/exarth', help_text='Facebook link')
     instagram = models.URLField(max_length=255, default='https://instagram.com/exarth', help_text='Instagram link')
@@ -141,6 +143,9 @@ class Technology(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_sub_technologies(self):
+        return Technology.objects.filter(parent=self)
 
 
 # ----------------------------

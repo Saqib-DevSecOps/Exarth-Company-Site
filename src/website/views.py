@@ -2,8 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, DetailView, ListView
 from sympy.integrals.meijerint_doc import category
 
-from src.services.projects.models import Project, ProjectCategory
-from src.services.resources.models import Blog
+from src.services.company.models import Technology
+from src.services.projects.models import Project, ProjectCategory, ProjectTestimonial
+from src.services.resources.models import Blog, CaseStudy
 from src.services.services.models import Service
 
 
@@ -14,7 +15,11 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Home'
+        context['services'] = Service.objects.all()[0:6]
+        context['technologies'] = Technology.objects.filter(parent__isnull=True)
+        context['projects'] = Project.objects.filter(project_tier="premium")
+        context['project_testimonials'] = ProjectTestimonial.objects.filter().order_by('-created_at')[0:5]
+        context['latest_blogs'] = Blog.objects.all()[0:3]
         return context
 
 
@@ -90,14 +95,21 @@ class BlogListView(ListView):
     model = Blog
     template_name = 'website/blog_list.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Blog'
-        return context
-
 
 class BlogDetailView(DetailView):
     template_name = 'website/blog_detail.html'
 
     def get_object(self, queryset=None):
         return get_object_or_404(Blog, pk=self.kwargs['pk'])
+
+
+class CaseStudyListView(ListView):
+    model = CaseStudy
+    template_name = 'website/casestudy_list.html'
+
+
+class CaseStudyDetailView(DetailView):
+    template_name = 'website/casestudy_detail.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(CaseStudy, pk=self.kwargs['pk'])
