@@ -79,17 +79,19 @@
 <div class="page-blog">
     <div class="container">
         <div class="row section-row align-items-center">
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <!-- Section Title Start -->
                 <div class="section-title">
                     <h2 class="wow fadeInUp" data-wow-delay="0.25s"
-                        style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">Partnering with
-                        top experts <span>and organizations</span></h2>
+                        style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">
+                        Showcasing Our <span>Exceptional Portfolio Projects</span>
+                    </h2>
+
                 </div>
                 <!-- Section Title End -->
             </div>
 
-            <div class="col-lg-6 text-end">
+            <div class="col-lg-4 text-end">
                 <!-- Contact Circle Start -->
                 <div class="contact-circle">
                     <img src="/static/website/images/contact-now-circle.svg" alt="">
@@ -101,14 +103,18 @@
         <div class="splide" id="image-slider">
             <div class="splide__track">
                 <ul class="splide__list">
-                    {% for obj in '123456' %}
+                    {% for obj in project_category %}
                     <li class="splide__slide">
                         <div class="col-lg-12 col-md-12 mb-4">
                             <div class="card ">
                                 <div class="card-body d-flex align-items-center">
-                                    <img src="/static/website/images/post-1.jpg" alt="AI Image" class="me-2"
-                                         style="height: 40px; width: 40px;">
-                                    <h6 class="mb-0">Artificial Intelligence</h6>
+                                    <a href="?category={{obj.name}}">
+                                        <div class="d-flex">
+                                            <img src="{{obj.thumbnail_image.url}}" alt="AI Image" class="me-2"
+                                                 style="height: 40px; width: 40px;">
+                                            <h6 class="mb-0">{{obj.name}}</h6>
+                                        </div>
+                                    </a>
                                 </div>
 
                             </div>
@@ -122,25 +128,26 @@
         <!-- Initialize Splide.js -->
 
         <div class="row">
-            {% for obj in '1234' %}
+            {% for obj in object_list %}
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card p-3 position-relative overflow-hidden">
                     <div class="post-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
                         <!-- Post Featured Image Start -->
                         <div class="post-featured-image">
                             <figure>
-                                <a href="blog-single.html" class="image-anime" data-cursor-text="View">
-                                    <img src="/static/website/images/post-1.jpg" alt="">
-                                </a>
+                                <img src="{{obj.thumbnail_image.url}}" alt="">
                             </figure>
                         </div>
                         <!-- Post Featured Image End -->
 
                         <!-- Post Item Content Start -->
                         <div class="post-item-content">
-                            <h2><a href="blog-single.html">Mental Wellness and Resilience: The Power of Coaching</a>
+                            <img src="{% static 'website/images/tier.png' %}" style="height:70px;" alt="rating"
+                                 class="ms-auto float-end me-2">
+                            <h2>{{obj.title}}
                             </h2>
-                            <p>Mental wellness and resilience are crucial for navigating life's challenges.</p>
+                            <small class="text-secondary">{{obj.tag_line}}</small>
+                            <p>{{obj.short_description}}</p>
                         </div>
                         <!-- Post Item Content End -->
 
@@ -150,27 +157,14 @@
                                 <p><img src="https://placeholder.io?100"></p>
                                 <p>⭐⭐⭐⭐⭐</p>
                                 <p>“This coaching session significantly improved my mental resilience!”</p>
-                                <a href="blog-single.html" class="btn btn-primary mt-3">Read More</a>
+                                <a href="{% url 'website:project-detail' obj.pk %}" class="btn btn-primary mt-3">Read
+                                    More</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
-            <div class="col-lg-12">
-                <!-- Page Pagination Start -->
-                <div class="page-pagination wow fadeInUp" data-wow-delay="1.2s"
-                     style="visibility: hidden; animation-delay: 1.2s; animation-name: none;">
-                    <ul class="pagination">
-                        <li><a href="#"><i class="fa-solid fa-arrow-left-long"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="fa-solid fa-arrow-right-long"></i></a></li>
-                    </ul>
-                </div>
-                <!-- Page Pagination End -->
-            </div>
         </div>
     </div>
 </div>

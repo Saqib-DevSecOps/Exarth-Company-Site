@@ -56,9 +56,9 @@ class ProjectTestimonialInline(admin.TabularInline):
 
 # Project Admin Class
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ['title', 'customer', 'category', 'start_date', 'end_date', 'budget', 'status', 'is_premium']
+    list_display = ['title', 'customer', 'category', 'start_date', 'end_date', 'budget', 'status', 'project_tier']
     search_fields = ['title', 'customer__name', 'category__name']
-    list_filter = ['status', 'is_premium']
+    list_filter = ['status', 'project_tier']
     inlines = [
         ProjectTechnologyInline,
         ProjectKeyFeatureInline,

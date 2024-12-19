@@ -23,12 +23,19 @@ class ServiceVideoInline(admin.TabularInline):
     readonly_fields = ('created_at', 'updated_at')
 
 
+class ServiceTechnologyInline(admin.TabularInline):
+    model = ServiceTechnology
+    extra = 1
+    fields = ('technology',)
+    readonly_fields = ('created_at', 'updated_at')
+
+
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'status', 'is_featured', 'created_at', 'updated_at')
     list_filter = ('status', 'category', 'is_featured')
     search_fields = ('title', 'category__name')
     ordering = ['-created_at']
-    inlines = [ServiceImageInline, ServiceVideoInline]
+    inlines = [ServiceImageInline, ServiceVideoInline, ServiceTechnologyInline]
 
 
 class ServiceTechnologyAdmin(admin.ModelAdmin):

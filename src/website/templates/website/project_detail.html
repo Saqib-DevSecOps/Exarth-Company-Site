@@ -2,6 +2,7 @@
 {% block subtitle %} Services {% endblock %}
 {% load static %}
 {% block content %}
+{% load custom_tags %}
 <style>
     .big-headings {
         color: #736a6a;
@@ -131,18 +132,15 @@
                 <div class="col-12 consultant-heading">
                     <div class="content-home">
                         <h1 class="home-heading">
-                            <span>SeedsWild</span> – AI Driven Multivendor Seeds Marketplace
+                            <span>{{object.title}}</span> – {{object.tag_line}}
                         </h1>
                         <p class="text-white">
-                            The service offers options for Predictions on spreads and totals, using a
-                            design that makes it easy to move between schedules, leaderboards, and new announcements,
-                            without including money, per say. The main goal of the application is to deliver a
-                            streamlined, and global Pickem experience to users with game reminders for upcoming events,
-                            and by illustrating the leaderboard positions.
+                            {{object.short_description}}
                         </p>
                         <div class="image-wrapper">
-                            <img src="{% static 'website/images/seedswild.png' %}" alt="SeedsWild">
+                            <img src="{{object.thumbnail_image.url}}" alt="SeedsWild">1
                         </div>
+
                     </div>
                 </div>
 
@@ -154,33 +152,48 @@
 <div class="company-growth p-4 bg-section">
     <div class="container">
         <div class="row mt-4">
-            <div class="col-md-3">
+            <div class="col-md-12">
 
-                <div class="section-title">
+                <div class="section-title mb-0">
                     <h2 class="wow fadeInUp" data-wow-delay="0.25s"
                         style="visibility: visible;font-size: 40px; animation-delay: 0.25s; animation-name: fadeInUp;">
                         Project <span>Overview</span>
                     </h2>
                 </div>
             </div>
-            <div class="col-md-9">
-                <p>The service offers options for Predictions <strong>on spreads and totals</strong>, using a
-                    design that makes it easy to move between schedules, leaderboards, and new announcements,
-                    <strong>without including money, per say</strong>. The main goal of the application is to
-                    deliver a streamlined, and global <strong>Pickem experience</strong> to users with game
-                    reminders for upcoming events, and by illustrating the leaderboard positions. </p>
+            <div class="col-md-12">
+                <p>{{object.content|safe}}</p>
             </div>
         </div>
+        {% if object.key_features.all %}
+        <div class="row gallery-items page-gallery-box">
+            {% for obj in object.images.all %}
+            <div class="col-lg-4 col-6">
+                <!-- image gallery start -->
+                <div class="photo-gallery wow fadeInUp" data-cursor-text="View"
+                     style="visibility: visible; animation-name: fadeInUp;">
+                    <a href="{{obj.image.url}}">
+                        <figure class="image-anime">
+                            <img src="{{obj.image.url}}" alt="">
+                        </figure>
+                    </a>
+                </div>
+                <!-- image gallery end -->
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
     </div>
 </div>
 
 
-<div class="page-blog">
+<div class="page-blog" style="padding: 100px 0 7px">
     <div class="container">
         <div class="row section-row align-items-center">
             <div class="col-lg-12 text-center">
                 <!-- Section Title Start -->
-                <div class="section-title">
+                <div class="section-title mt-">
                     <h2 class="wow fadeInUp" data-wow-delay="0.25s"
                         style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">Key <span>Features</span>
                     </h2>
@@ -188,139 +201,128 @@
                 <!-- Section Title End -->
             </div>
         </div>
+        {% for obj in object.key_features.all %}
         <div class="row">
-            {% for obj in '12' %}
+            {% if forloop.counter|divisibleby:2 %}
+            <!-- Even Number Layout -->
+            <div class="col-lg-6 col-md-6 p-4 mb-4">
+                <div class="post-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                    <div class="post-featured-image">
+                        <div class="key-content-card">
+                            <h2 class="big-headings">{{ forloop.counter|stringformat:"02d" }}.</h2>
+                            <h3 class="key-content-heading">{{ obj.title }}</h3>
+                            <p>{{ obj.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-6 col-md-6 mb-4">
                 <div class="post-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-                    <!-- Post Featured Image Start -->
                     <div class="post-featured-image">
                         <figure>
-                            <a href="blog-single.html" class="image-anime" data-cursor-text="View">
-                                <img src="/static/website/images/post-1.jpg" alt="">
-                            </a>
+                            <img src="{{ obj.thumbnail_image.url }}" alt="">
                         </figure>
                     </div>
-                    <!-- Post Featured Image End -->
+                </div>
+            </div>
+            {% else %}
+            <!-- Odd Number Layout -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="post-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                    <div class="post-featured-image">
+                        <figure>
+                            <img src="{{ obj.thumbnail_image.url }}" alt="">
+                        </figure>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 p-4 mb-4">
                 <div class="post-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-                    <!-- Post Featured Image Start -->
                     <div class="post-featured-image">
                         <div class="key-content-card">
-                            <h2 class="big-headings">01.</h2>
-                            <h3 class="key-content-heading">AI based Video Call </h3>
-                            <p>The AI avatar can mimic facial expressions, and gestures in real-time, in order to
-                                provide a more personalized communication experience.
-                                The AI avatar can mimic facial expressions, and gestures in real-time, in order to
-                                provide a more personalized communication experience.
-                                The AI avatar can mimic facial expressions, and gestures in real-time, in order to
-                                provide a more personalized communication experience.
-                            </p>
+                            <h2 class="big-headings">{{ forloop.counter|stringformat:"02d" }}.</h2>
+                            <h3 class="key-content-heading">{{ obj.title }}</h3>
+                            <p>{{ obj.description }}</p>
                         </div>
                     </div>
-                    <!-- Post Featured Image End -->
                 </div>
             </div>
-
-            <div class="col-lg-6 col-md-6 p-4 mb-4">
-                <div class="post-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-                    <!-- Post Featured Image Start -->
-                    <div class="post-featured-image">
-                        <div class="key-content-card">
-                            <h2 class="big-headings">01.</h2>
-                            <h3 class="key-content-heading">AI based Video Call </h3>
-                            <p>The AI avatar can mimic facial expressions, and gestures in real-time, in order to
-                                provide a more personalized communication experience.
-                                The AI avatar can mimic facial expressions, and gestures in real-time, in order to
-                                provide a more personalized communication experience.The AI avatar can mimic facial
-                                expressions, and gestures in real-time, in order to
-                                provide a more personalized communication experience.</p>
-                        </div>
-                    </div>
-                    <!-- Post Featured Image End -->
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-md-6 mb-4">
-                <div class="post-item wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-                    <!-- Post Featured Image Start -->
-                    <div class="post-featured-image">
-                        <figure>
-                            <a href="blog-single.html" class="image-anime" data-cursor-text="View">
-                                <img src="/static/website/images/post-1.jpg" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <!-- Post Featured Image End -->
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-
-<div class="company-growth bg-section mt-4">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-12">
-                <!-- Our Expertise Content Start -->
-                <div class="our-expertise-content">
-                    <div class="section-title ">
-                        <h2 class="wow fadeInUp" data-wow-delay="0.25s">Challenges &
-                            <span>Solutions</span></h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.5s">While creating the application, our team came
-                            across technical challenges and employed applicable solutions, related to the project:
-                        </p>
-                    </div>
-                </div>
-                <!-- Our Expertise Content End -->
-            </div>
-        </div>
-        {% for obj in '123' %}
-        <div class="row ">
-            <div class="col-lg-6 mb-3">
-<!--                <h4>User Experience Challenges:</h4>-->
-                <div class="d-flex">
-
-                    <img src="{% static 'website/images/challenge.png' %}"/>
-                    <h5 class="mt-4">CHALLENGE</h5>
-                </div>
-
-                Ensuring Data Security for User Transactions
-                Working with sensitive data, like user information and financial transactions, called for a strong
-                security structure. To function properly, the app needed to adhere to rigorous data privacy rules and
-                still deliver a seamless and secure user experience.
-                Scalable Backend to Handle Betting Volume
-                The app observed important increases in traffic, particularly during significant sports events. The
-                obstacle was to ensure efficient scale-up of the backend to fulfill the needs of thousands of betting
-                transactions simultaneously, while avoiding slowness or server outages.
-            </div>
-            <div class="col-lg-6" style="margin-top: 90px;">
-                <div class="card shadow p-4">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <img src="{% static 'website/images/solution.png' %}"/>
-                            <h4 class="mt-4">SOLUTIONS</h4>
-                        </div>
-
-
-                        For data encryption purposes, AWS was employed, along with tough security protocols that
-                        maintained both
-                        user data privacy and compliance with regulations related to betting.
-                        Thanks to PostgreSQL and Express.JS, we achieved a scalable backend infrastructure able to
-                        efficiently
-                        deal with significant volumes of betting transactions
-                    </div>
-                </div>
-            </div>
+            {% endif %}
         </div>
 
         {% endfor %}
     </div>
-
 </div>
 
+{% if object.challenges.all %}
+<div class="our-approach bg-section">
+    <div class="container">
+        <div class="row section-row align-items-center">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2 class="wow fadeInUp" data-wow-delay="0.25s">Challenges &
+                        <span>Solutions</span></h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="our-approach-content">
+                    <p class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">At the heart of our
+                        While creating the application, our team came
+                        across technical challenges and employed applicable solutions, related to the project: </p>
+
+                    <!-- Mission Vision Item Start -->
+                    <div class="mission-vision-list">
+                        <div class="row">
+                            {% for obj in object.challenges.all %}
+                            <div class="col-md-6 col-12">
+                                <!-- Mission Vision Item Start -->
+                                <div class="mission-vision-item wow fadeInUp" data-wow-delay="0.2s"
+                                     style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                    <div class="d-flex">
+                                        <div class="icon-box">
+                                            <img src="{% static 'website/images/challenge.png' %}" alt="">
+                                        </div>
+                                        <h3 class="mt-2">&nbsp;&nbsp;CHALLENGE</h3>
+                                    </div>
+
+                                    <div class="mission-vision-content">
+                                        <div>{{obj.challenge|safe}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Mission Vision Item End -->
+                            </div>
+                            <div class="col-md-6 col-12 ">
+                                <!-- Mission Vision Item Start -->
+                                <div class="mission-vision-item wow fadeInUp" data-wow-delay="0.2s"
+                                     style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                    <div class="d-flex">
+                                        <div class="icon-box">
+                                            <img src="{% static 'website/images/challenge.png' %}" alt="">
+                                        </div>
+                                        <h3 class="mt-2">&nbsp;&nbsp;SOLUTION</h3>
+                                    </div>
+
+                                    <div class="mission-vision-content">
+                                        <div>{{obj.solution|safe}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Mission Vision Item End -->
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if object.technologies.all %}
 <div class="page-blog">
     <div class="container">
         <div class="row section-row align-items-center">
@@ -335,19 +337,19 @@
             </div>
         </div>
         <div class="row">
-            {% for obj in '1234' %}
+            {% for obj in object.technologies.all %}
             <div class="col-md-3 col-sm-6">
                 <div class="trust-card">
-                    <img src="{% static 'website/images/solution.png' %}"/>
-                    <h2>Docker</h2>
-                    <p>A design for cloud infrastructure that provides assurance for scalability, data security, and
-                        high availability. </p>
+                    <img src="{{obj.technology.thumbnail_image.url}}" style="height: 60px;"/>
+                    <h2>{{obj.technology.title}}</h2>
+                    <p>{{obj.technology.description}}</p>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
 </div>
+{% endif %}
 <div class="our-testimonial bg-section">
     <div class="container">
         <div class="row">
@@ -357,8 +359,8 @@
                     <div class="section-title">
                         <h3 class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">testimonial</h3>
                         <h2 class="wow fadeInUp" data-wow-delay="0.25s"
-                            style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">Real success
-                            stories from our <span>coaching clients</span>
+                            style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInUp;">Success
+                            story from our <span>Project clients</span>
                         </h2>
                     </div>
                     <!-- Section Title End -->
@@ -371,14 +373,16 @@
                     <div class="testimonial-item">
                         <div class="testimonial-slider-image">
                             <figure class="image-anime">
-                                <img src="/static/website/images/testimonial-img-1.jpg" alt="">
+                                <img src="{{object.get_project_testimonial.customer.thumbnail_image|image_or_placeholder}}"
+                                     alt="">
                             </figure>
                         </div>
 
                         <div class="testimonial-slider-content">
                             <div class="testimonial-header">
                                 <div class="testimonial-rating-company">
-                                    <img src="/static/website/images/icon-testimonial-rating-4.svg" alt="">
+                                    <img src="{{object.get_project_testimonial.project.logo|image_or_placeholder}}"
+                                         alt="">
                                 </div>
                                 <div class="testimonial-quote">
                                     <img src="/static/website/images/testimonial-quote.svg" alt="">
@@ -392,13 +396,11 @@
                                 <i class="fa-solid fa-star"></i>
                             </div>
                             <div class="testimonial-content">
-                                <p>Our backyard has been completely transformed! The team was professional,
-                                    attentive, and delivered beyond our expectations. the quality of work is
-                                    outstanding.</p>
+                                <p>{{object.get_project_testimonial.testimonial}}</p>
                             </div>
                             <div class="author-content">
-                                <h3>annette black</h3>
-                                <p>Sr. Gardener</p>
+                                <h3>{{object.get_project_testimonial.customer.name}}</h3>
+                                <p>{{object.get_project_testimonial.customer.designation}}</p>
                             </div>
                         </div>
                     </div>
@@ -423,7 +425,7 @@
         <div class="splide" id="post-slider">
             <div class="splide__track">
                 <ul class="splide__list">
-                    {% for obj in '1234' %}
+                    {% for obj in similar_project %}
                     <li class="splide__slide">
                         <div class="col-lg-12 col-md-12 mb-4">
                             <div class="card p-3 position-relative overflow-hidden"
@@ -433,28 +435,27 @@
                                     <!-- Post Featured Image Start -->
                                     <div class="post-featured-image">
                                         <figure>
-                                            <a href="blog-single.html" class="image-anime" data-cursor-text="View">
-                                                <img src="/static/website/images/post-1.jpg" alt="">
-                                            </a>
+                                            <img src="{{obj.thumbnail_image|image_or_placeholder}}" alt="">
                                         </figure>
                                     </div>
                                     <!-- Post Featured Image End -->
 
                                     <!-- Post Item Content Start -->
                                     <div class="post-item-content">
-                                        <h2>
-                                            <a href="blog-single.html">Mental Wellness and Resilience: The Power of
-                                                Coaching</a>
+                                        <img src="{% static 'website/images/tier.png' %}" style="height:70px;"
+                                             alt="rating"
+                                             class="ms-auto float-end me-2">
+                                        <h2>{{obj.title}}
                                         </h2>
-                                        <p>Mental wellness and resilience are crucial for navigating life's
-                                            challenges.</p>
+                                        <small>{{obj.tag_line}}</small>
+                                        <p>{{obj.short_description}}</p>
                                     </div>
                                     <!-- Post Item Content End -->
 
                                     <!-- Slider Overlay with Button -->
                                     <div class="card-slider-overlay">
                                         <div class="slider-content">
-                                            <p><img src="https://placeholder.io?100" alt="Rating"></p>
+                                            <p><img src="https://placeholder.co/100" alt="Rating"></p>
                                             <p>⭐⭐⭐⭐⭐</p>
                                             <p>“This coaching session significantly improved my mental resilience!”</p>
                                             <a href="blog-single.html" class="btn btn-primary mt-3">Read More</a>
@@ -468,12 +469,10 @@
                 </ul>
             </div>
         </div>
-
     </div>
 </div>
-
-
 {% endblock %}
+
 
 {% block extra_js %}
 <script>

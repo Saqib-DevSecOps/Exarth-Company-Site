@@ -54,8 +54,15 @@ class Project(models.Model):
         ('published', 'Published'),
         ('archived', 'Archived'),
     ]
+    PROJECT_TIER = [
+        ('basic', 'Basic'),
+        ('standard', 'Standard'),
+        ('premium', 'Premium'),
+    ]
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     title = models.CharField(max_length=255)
+    tag_line = models.CharField(max_length=255, help_text='Enter a tag line for the project')
+    logo = models.ImageField(upload_to='projects/logos/', null=True, blank=True)
     thumbnail_image = models.ImageField(upload_to='projects/thumbnails/', null=True, blank=True)
     category = models.ForeignKey(ProjectCategory, on_delete=models.CASCADE,
                                  help_text='Select a category for the project')
@@ -69,8 +76,8 @@ class Project(models.Model):
     content = CKEditor5Field('Content', config_name='extends')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
     project_technologies = models.ManyToManyField('company.Technology', through='ProjectTechnology')
+    project_tier = models.CharField(max_length=20, choices=PROJECT_TIER, default='basic')
 
-    is_premium = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -81,6 +88,12 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_project_testimonial(self):
+        try:
+            return ProjectTestimonial.objects.get(project=self.id)
+        except ProjectTestimonial.DoesNotExist:
+            return None
 
 
 class ProjectKeyFeature(models.Model):
@@ -105,7 +118,8 @@ class ProjectKeyFeature(models.Model):
 class ProjectChallenge(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='challenges')
-    name = models.CharField(max_length=255, help_text='Enter the project challenge name', verbose_name='Challenge Name')
+    name = models.CharField(max_length=255, help_text='Enter the project challenge name', verbose_name='Challenge Name',
+                            null=True, blank=True)
     challenge = CKEditor5Field('Challenge', config_name='extends', help_text='Enter the project challenge')
     solution = CKEditor5Field('Solution', config_name='extends', help_text='Enter the project solution')
 
@@ -123,7 +137,7 @@ class ProjectChallenge(models.Model):
 
 class ProjectTechnology(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='technologies')
     technology = models.ForeignKey('company.Technology', on_delete=models.CASCADE)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -175,7 +189,7 @@ class ProjectVideo(models.Model):
 
 class ProjectTestimonial(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
-    project = models.OneToOneField(Project, on_delete=models.CASCADE)
+    project = models.OneToOneField(Project, on_delete=models.CASCADE, related_name='testimonial')
     customer = models.ForeignKey(ProjectCustomer, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(default=5)
     testimonial = models.TextField()
