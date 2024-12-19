@@ -479,13 +479,13 @@
     document.addEventListener('DOMContentLoaded', function () {
         var splide = new Splide('#post-slider', {
             type: 'loop',     // Infinite looping
-            perPage: 4,          // Show 3 posts at a time
+            perPage: 3,          // Show 3 posts at a time
             focus: 'center',
             gap: '30px',
             autoplay: true,     // Auto transition between slides
             breakpoints: {
                 1500: {
-                    perPage: 4,     // Show 4 posts on extra-large screens
+                    perPage: 3,     // Show 4 posts on extra-large screens
                 },
                 1200: {
                     perPage: 3,     // Show 3 posts on large screens

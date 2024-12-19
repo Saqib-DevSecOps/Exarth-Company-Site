@@ -184,6 +184,7 @@ class Team(models.Model):
     position_number = models.PositiveSmallIntegerField(help_text='Position number')
     rank = models.ForeignKey(Rank, on_delete=models.CASCADE, help_text='Team member rank')
     profile_image = models.ImageField(upload_to='team/profiles/', blank=True, null=True)
+    experience = models.PositiveSmallIntegerField(help_text='Years of experience')
     description = models.TextField(help_text='Team member description')
 
     facebook_link = models.URLField(blank=True, null=True, help_text='Facebook profile')
@@ -196,6 +197,55 @@ class Team(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class TeamMemberQualification(models.Model):
+    team_member = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='qualifications')
+    title = models.CharField(max_length=255, help_text='Degree or certification title')
+    institution = models.CharField(max_length=255, help_text='Institution or university')
+    year_completed = models.PositiveSmallIntegerField(help_text='Year of completion')
+
+    def __str__(self):
+        return f"{self.title} - {self.institution}"
+
+
+class TeamMemberExperience(models.Model):
+    team_member = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='experiences')
+    position = models.CharField(max_length=255, help_text='Job title')
+    company = models.CharField(max_length=255, help_text='Company or organization name')
+    start_date = models.DateField(help_text='Start date of employment')
+    end_date = models.DateField(help_text='End date of employment', null=True, blank=True)
+    description = models.TextField(help_text='Description of responsibilities and achievements')
+
+    def __str__(self):
+        return f"{self.position} at {self.company}"
+
+
+class TeamMemberSkill(models.Model):
+    team_member = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='skills')
+    technology = models.ForeignKey(Technology, on_delete=models.CASCADE, help_text='Technology or skill')
+    proficiency_level = models.CharField(
+        max_length=50,
+        choices=[('beginner', 'Beginner'), ('intermediate', 'Intermediate'), ('advanced', 'Advanced')],
+        default='beginner',
+        help_text='Proficiency level'
+    )
+
+    def __str__(self):
+        return f"{self.name} ({self.proficiency_level})"
+
+
+class TeamMemberCertificate(models.Model):
+    team_member = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='certificates')
+    title = models.CharField(max_length=255, help_text='Certificate or award title')
+    thumbnail_image = models.ImageField(upload_to='team/certificates/', blank=True, null=True)
+    issuing_organization = models.CharField(max_length=255, help_text='Organization that issued the certificate')
+    issue_date = models.DateField(help_text='Date the certificate was issued')
+    expiration_date = models.DateField(help_text='Expiration date of the certificate', null=True, blank=True)
+    certificate_url = models.URLField(blank=True, null=True, help_text='Link to the certificate (optional)')
+
+    def __str__(self):
+        return f"{self.title} from {self.issuing_organization}"
 
 
 # ----------------------------

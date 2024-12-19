@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     Country, NewsLetter, Application, Technology,
-    Rank, Team, Faq
+    Rank, Team, Faq, TeamMemberQualification, TeamMemberExperience, TeamMemberSkill, TeamMemberCertificate
 )
 
 # ----------------------------
@@ -64,11 +64,58 @@ class RankAdmin(admin.ModelAdmin):
 # Team Admin
 # ----------------------------
 
+
+
+# Inline admin for TeamMemberQualification
+class TeamMemberQualificationInline(admin.TabularInline):
+    model = TeamMemberQualification
+    extra = 1  # Number of empty forms to display
+    fields = ['title', 'institution', 'year_completed']
+    max_num = 10  # Limit to 10 qualifications
+
+# Inline admin for TeamMemberExperience
+class TeamMemberExperienceInline(admin.TabularInline):
+    model = TeamMemberExperience
+    extra = 1
+    fields = ['position', 'company', 'start_date', 'end_date', 'description']
+    max_num = 10
+
+# Inline admin for TeamMemberSkill
+class TeamMemberSkillInline(admin.TabularInline):
+    model = TeamMemberSkill
+    extra = 1
+    fields = ['technology', 'proficiency_level']
+    max_num = 10
+
+# Inline admin for TeamMemberCertificate
+class TeamMemberCertificateInline(admin.TabularInline):
+    model = TeamMemberCertificate
+    extra = 1
+    fields = ['title', 'issuing_organization', 'issue_date', 'expiration_date', 'certificate_url', 'thumbnail_image']
+    max_num = 10
+
+# Main admin for Team
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ('name', 'rank', 'position_number', 'is_active')
-    search_fields = ('name', 'rank__name')
-    list_filter = ('rank', 'is_active')
+    list_display = ['name', 'position_number', 'rank', 'experience', 'is_active']
+    search_fields = ['name', 'rank__name']
+    list_filter = ['rank', 'is_active']
+    inlines = [
+        TeamMemberQualificationInline,
+        TeamMemberExperienceInline,
+        TeamMemberSkillInline,
+        TeamMemberCertificateInline,
+    ]
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'position_number', 'rank', 'profile_image', 'experience', 'description', 'is_active')
+        }),
+        ('Social Links', {
+            'fields': ('facebook_link', 'instagram_link', 'linkedin_link', 'twitter_link', 'github_link')
+        }),
+    )
+    readonly_fields = ('profile_image',)  # Make profile image readonly if needed
+
 
 
 # ----------------------------
