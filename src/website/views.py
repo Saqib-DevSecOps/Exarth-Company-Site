@@ -3,6 +3,7 @@ from django.views.generic import TemplateView, DetailView, ListView
 from sympy.integrals.meijerint_doc import category
 
 from src.services.projects.models import Project, ProjectCategory
+from src.services.resources.models import Blog
 from src.services.services.models import Service
 
 
@@ -85,7 +86,8 @@ class TeamView(TemplateView):
         return context
 
 
-class BlogView(TemplateView):
+class BlogListView(ListView):
+    model = Blog
     template_name = 'website/blog_list.html'
 
     def get_context_data(self, **kwargs):
@@ -94,10 +96,8 @@ class BlogView(TemplateView):
         return context
 
 
-class BlogDetailsView(TemplateView):
+class BlogDetailView(DetailView):
     template_name = 'website/blog_detail.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Blog Details'
-        return context
+    def get_object(self, queryset=None):
+        return get_object_or_404(Blog, pk=self.kwargs['pk'])

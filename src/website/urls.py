@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
-    HomeView, AboutView, ContactView, ServiceListView, ServiceDetailView, TeamView, BlogView, ProjectListView,
-    ProjectDetailView
+    HomeView, AboutView, ContactView, ServiceListView, ServiceDetailView, TeamView, BlogListView, ProjectListView,
+    ProjectDetailView, BlogDetailView
 )
 
 app_name = 'website'
@@ -14,7 +14,7 @@ urlpatterns = [
     path('project-list/', ProjectListView.as_view(), name='project-list'),
     path('project/<str:pk>/', ProjectDetailView.as_view(), name='project-detail'),
     path('team/', TeamView.as_view(), name='team'),
-    path('blog/', BlogView.as_view(), name='blog'),
-    path('blog-details/', BlogView.as_view(), name='blog-details'),
+    path('blog/', BlogListView.as_view(), name='blog'),
+    path('blog/<str:pk>/', BlogDetailView.as_view(), name='blog-detail'),
 
 ]
