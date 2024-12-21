@@ -97,7 +97,7 @@ class TeamMemberCertificateInline(admin.TabularInline):
 # Main admin for Team
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ['name', 'position_number', 'rank', 'experience', 'is_active']
+    list_display = ['name', 'position_number', 'rank', 'is_active']
     search_fields = ['name', 'rank__name']
     list_filter = ['rank', 'is_active']
     inlines = [
@@ -108,13 +108,12 @@ class TeamAdmin(admin.ModelAdmin):
     ]
     fieldsets = (
         (None, {
-            'fields': ('name', 'position_number', 'rank', 'profile_image', 'experience', 'description', 'is_active')
+            'fields': ('name', 'position_number', 'rank', 'profile_image', 'description', 'is_active')
         }),
         ('Social Links', {
             'fields': ('facebook_link', 'instagram_link', 'linkedin_link', 'twitter_link', 'github_link')
         }),
     )
-    readonly_fields = ('profile_image',)  # Make profile image readonly if needed
 
 
 

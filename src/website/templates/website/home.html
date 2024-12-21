@@ -106,8 +106,8 @@
 
                         <!-- Hero Button Start -->
                         <div class="hero-btn wow fadeInUp" data-wow-delay="0.4s">
-                            <a href="contact.html" class="btn-default">get in touch</a>
-                            <a href="book-appointment.html" class="btn-default btn-highlighted">explore more</a>
+                            <a href="{% url 'website:contact' %}" class="btn-default">get in touch</a>
+                            <a href="{% url 'website:about' %}" class="btn-default btn-highlighted">explore more</a>
                         </div>
                         <!-- Hero Button End -->
                     </div>
@@ -118,60 +118,60 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="export-coaching-box wow fadeInUp" data-wow-delay="0.6s">
-                        <!-- Export Coaching Step Start -->
+                        <!-- Software Development Step Start -->
                         <div class="export-coaching-step">
                             <div class="icon-box">
                                 <img src="images/icon-export-coaching-1.svg" alt="">
                             </div>
                             <div class="export-coaching-step-content">
-                                <p>Tailored Coaching Solutions for growth.</p>
+                                <p>Custom software solutions for business growth.</p>
                             </div>
                         </div>
-                        <!-- Export Coaching Step End -->
+                        <!-- Software Development Step End -->
 
-                        <!-- Export Coaching Step Start -->
+                        <!-- Software Development Step Start -->
                         <div class="export-coaching-step">
                             <div class="icon-box">
                                 <img src="images/icon-export-coaching-2.svg" alt="">
                             </div>
                             <div class="export-coaching-step-content">
-                                <p>Proven Coaching Techniques Backed.</p>
+                                <p>Innovative development backed by experience.</p>
                             </div>
                         </div>
-                        <!-- Export Coaching Step End -->
+                        <!-- Software Development Step End -->
 
-                        <!-- Export Coaching Step Start -->
+                        <!-- Software Development Step Start -->
                         <div class="export-coaching-step">
                             <div class="icon-box">
                                 <img src="images/icon-export-coaching-3.svg" alt="">
                             </div>
                             <div class="export-coaching-step-content">
-                                <p>Holistic Life and Business Coaching.</p>
+                                <p>End-to-end development solutions.</p>
                             </div>
                         </div>
-                        <!-- Export Coaching Step End -->
+                        <!-- Software Development Step End -->
 
-                        <!-- Export Coaching Step Start -->
+                        <!-- Software Development Step Start -->
                         <div class="export-coaching-step">
                             <div class="icon-box">
                                 <img src="images/icon-export-coaching-4.svg" alt="">
                             </div>
                             <div class="export-coaching-step-content">
-                                <p>Flexible Client Centered Coaching Program.</p>
+                                <p>Agile, client-centered development process.</p>
                             </div>
                         </div>
-                        <!-- Export Coaching Step End -->
+                        <!-- Software Development Step End -->
 
-                        <!-- Export Coaching Step Start -->
+                        <!-- Software Development Step Start -->
                         <div class="export-coaching-step">
                             <div class="icon-box">
                                 <img src="images/icon-export-coaching-5.svg" alt="">
                             </div>
                             <div class="export-coaching-step-content">
-                                <p>Expert Guidance with Ongoing Support.</p>
+                                <p>Ongoing support and maintenance.</p>
                             </div>
                         </div>
-                        <!-- Export Coaching Step End -->
+                        <!-- Software Development Step End -->
                     </div>
                 </div>
             </div>
@@ -240,86 +240,34 @@
                 <div class="about-us-content">
                     <!-- Section Title Start -->
                     <div class="section-title">
-                        <h3 class="wow fadeInUp">about us</h3>
-                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">Expert guidance and
-                            <span>personalized coaching.</span></h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">Receive tailored coaching that empowers you to
-                            navigate challenges and achieve your personal and professional goals. With expert
-                            guidance.</p>
+                        <h3 class="wow fadeInUp">About Us</h3>
+                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">Delivering Cutting-Edge Software Solutions for
+                            <span>Business Growth.</span>
+                        </h2>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s">We specialize in custom software development,
+                            enabling businesses to achieve greater efficiency and scalability. Our expert team delivers
+                            innovative solutions that are aligned with your specific needs, driving long-term
+                            success.</p>
                     </div>
                     <!-- Section Title End -->
 
                     <!-- About Us List Start -->
                     <div class="about-us-list wow fadeInUp" data-wow-delay="0.6s">
                         <ul>
-                            <li>goal setting and accountability</li>
-                            <li>mindset and confidence building</li>
+                            <li>Custom solutions for complex business challenges</li>
+                            <li>Data-driven insights for informed decision-making</li>
+                            <li>Expertise in emerging technologies and innovative solutions</li>
+                            <li>End-to-end cross-platform development</li>
+                            <li>Focus on security, scalability, and performance</li>
                         </ul>
                     </div>
                     <!-- About Us List End -->
 
-                    <!-- About Us Body Start -->
-                    <div class="about-us-body">
-                        <!-- About Company Client Start -->
-                        <div class="about-comapny-client wow fadeInUp" data-wow-delay="0.8s">
-                            <!-- Company Client Images Start -->
-                            <div class="company-client-images">
-                                <div class="client-image">
-                                    <figure class="image-anime">
-                                        <img src="{% static 'website/images/satisfy-client-img-1.jpg' %}" alt="">
-                                    </figure>
-                                </div>
-                                <div class="client-image">
-                                    <figure class="image-anime">
-                                        <img src="{% static 'website/images/satisfy-client-img-2.jpg' %}" alt="">
-                                    </figure>
-                                </div>
-                                <div class="client-image">
-                                    <figure class="image-anime">
-                                        <img src="{% static 'website/images/satisfy-client-img-3.jpg' %}" alt="">
-                                    </figure>
-                                </div>
-                                <div class="client-image">
-                                    <figure class="image-anime">
-                                        <img src="{% static 'website/images/satisfy-client-img-4.jpg' %}" alt="">
-                                    </figure>
-                                </div>
-                                <div class="client-image">
-                                    <figure class="image-anime">
-                                        <img src="{% static 'website/images/satisfy-client-img-5.jpg' %}" alt="">
-                                    </figure>
-                                </div>
-                            </div>
-                            <!-- Company Client Images End -->
-
-                            <!-- Company Client Counter Start -->
-                            <div class="company-client-counter">
-                                <p>Join our <span>5000</span>+ satisfied client</p>
-                            </div>
-                            <!-- Company Client Counter End -->
-                        </div>
-                        <!-- About Company Client End -->
-
-                        <!-- About Company Result Start -->
-                        <div class="about-company-result wow fadeInUp" data-wow-delay="0.8s">
-                            <div class="icon-box">
-                                <img src="{% static 'website/images/icon-company-result.svg' %}" alt="">
-                            </div>
-
-                            <div class="company-result-content">
-                                <h3>Creative Result</h3>
-                                <p>Award wining</p>
-                            </div>
-                        </div>
-                        <!-- About Company Result End -->
-                    </div>
-                    <!-- About Us Body End -->
-
-                    <!-- About Us Footet Start -->
+                    <!-- About Us Footer Start -->
                     <div class="about-us-footer wow fadeInUp" data-wow-delay="1s">
-                        <a href="contact.html" class="btn-default">get in touch</a>
+                        <a href="contact.html" class="btn-default">Contact Us</a>
                     </div>
-                    <!-- About Us Footet End -->
+                    <!-- About Us Footer End -->
                 </div>
                 <!-- About Us Content End -->
             </div>
@@ -502,11 +450,22 @@
         <div class="row align-items-center">
             <div class="col-lg-5">
                 <!-- Industries We Serve Image Start -->
-                <div class="company-growth-image">
-                    <figure class="image-anime reveal">
-                        <img src="{% static 'website/images/company-growth-img.jpg' %}" alt="">
-                    </figure>
-                </div>
+                <model-viewer
+                        id="model-viewer"
+                        src="{% static 'website/images/model/imac_computer/scene.gltf' %}"
+                        alt="3D Model"
+                        camera-controls
+                        disable-zoom
+                        auto-rotate
+                        rotation-per-second="40deg"
+                        disable-tap
+                        interaction-prompt="none"
+                        style="height: 500px;width: 500px"
+                        min-camera-orbit="auto auto 2.0m"
+                        max-camera-orbit="auto auto 2.0m">
+                </model-viewer>
+
+
                 <!-- Industries We Serve Image End -->
             </div>
 
@@ -973,4 +932,5 @@
 
     });
 </script>
+
 {% endblock extra_js %}

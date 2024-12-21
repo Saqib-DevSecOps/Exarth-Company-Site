@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, DetailView, ListView
 from sympy.integrals.meijerint_doc import category
 
-from src.services.company.models import Technology
+from src.services.company.models import Technology, Team
 from src.services.projects.models import Project, ProjectCategory, ProjectTestimonial
 from src.services.resources.models import Blog, CaseStudy
 from src.services.services.models import Service
@@ -28,7 +28,7 @@ class AboutView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'About'
+        context['team'] = Team.objects.all()
         return context
 
 
@@ -101,6 +101,13 @@ class BlogDetailView(DetailView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Blog, pk=self.kwargs['pk'])
+
+
+class TeamDetailView(DetailView):
+    template_name = 'website/team_detail.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Team, pk=self.kwargs['pk'])
 
 
 class CaseStudyListView(ListView):

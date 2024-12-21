@@ -2,6 +2,7 @@ import uuid
 
 from django.core.exceptions import ValidationError
 from django.db import models
+from django_ckeditor_5.fields import CKEditor5Field
 from django_resized import ResizedImageField
 from phonenumber_field.formfields import PhoneNumberField
 
@@ -184,8 +185,7 @@ class Team(models.Model):
     position_number = models.PositiveSmallIntegerField(help_text='Position number')
     rank = models.ForeignKey(Rank, on_delete=models.CASCADE, help_text='Team member rank')
     profile_image = models.ImageField(upload_to='team/profiles/', blank=True, null=True)
-    experience = models.PositiveSmallIntegerField(help_text='Years of experience')
-    description = models.TextField(help_text='Team member description')
+    description = CKEditor5Field(help_text='Team member description')
 
     facebook_link = models.URLField(blank=True, null=True, help_text='Facebook profile')
     instagram_link = models.URLField(blank=True, null=True, help_text='Instagram profile')
@@ -197,6 +197,11 @@ class Team(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['position_number']
+        verbose_name_plural = 'Team Members'
+
 
 
 class TeamMemberQualification(models.Model):
@@ -232,7 +237,7 @@ class TeamMemberSkill(models.Model):
     )
 
     def __str__(self):
-        return f"{self.name} ({self.proficiency_level})"
+        return f"{self.technology.title} ({self.proficiency_level})"
 
 
 class TeamMemberCertificate(models.Model):
